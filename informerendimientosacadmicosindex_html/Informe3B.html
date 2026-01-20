@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Académico 3º ESO B</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section h2 {
+      color: #667eea;
+      font-size: 2em;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card h3 {
+      font-size: 1em;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .stat-card .value {
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+
+    .chart-container {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      margin: 20px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .bars-wrapper {
+      margin: 20px 0;
+    }
+
+    .bar-item {
+      margin: 15px 0;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .bar-bg {
+      background: #e9ecef;
+      height: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: white;
+      font-weight: bold;
+      transition: width 0.5s ease;
+    }
+
+    .bar-green {
+      background: linear-gradient(90deg, #10b981, #059669);
+    }
+
+    .bar-yellow {
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    }
+
+    .bar-red {
+      background: linear-gradient(90deg, #f87171, #ef4444);
+    }
+
+    .alert {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+
+    .alert.danger {
+      background: #f8d7da;
+      border-left-color: #dc3545;
+    }
+
+    .alert h3 {
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .alert.danger h3 {
+      color: #721c24;
+    }
+
+    .proposals {
+      background: #d4edda;
+      border-left: 5px solid #28a745;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+
+    .proposals h3 {
+      color: #155724;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+
+    .proposals ul {
+      margin-left: 20px;
+    }
+
+    .proposals li {
+      margin: 10px 0;
+      line-height: 1.6;
+      color: #155724;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    th {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    tr:hover {
+      background: #f8f9fa;
+    }
+
+    .fail {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .pass {
+      color: #28a745;
+    }
+
+    .conclusion {
+      background: #e7f3ff;
+      border-left: 5px solid #2196f3;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 10px;
+      line-height: 1.8;
+    }
+
+    .conclusion h3 {
+      color: #1565c0;
+      margin-bottom: 15px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .container {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 INFORME ACADÉMICO</h1>
+      <p>3º ESO B - Evaluación 1º Trimestre 2025-26</p>
+    </header>
+
+    <div class="content">
+      <!-- Resumen Ejecutivo -->
+      <div class="section">
+        <h2>📋 Resumen Global GRUPO 3B</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Alumnos/as</h3>
+            <div class="value">27</div>
+          </div>
+          <div class="stat-card">
+            <h3>Total Alumnos/as Ámbito </h3>
+            <div class="value">4</div>
+          </div>
+          <div class="stat-card">
+            <h3>Materias Evaluadas</h3>
+            <div class="value">18</div>
+          </div>
+          <div class="stat-card">
+            <h3>Nota Media Grupo</h3>
+            <div class="value">6.8</div>
+          </div>
+          <div class="stat-card">
+            <h3>Alumnos 0 Suspensos</h3>
+            <div class="value">51.8%</div>
+          </div>
+          <div class="stat-card">
+            <h3>Alumnos 0-2 Suspensos</h3>
+            <div class="value">66.7%</div>
+          </div>
+          <div class="stat-card">
+            <h3>Alumnos 3++ Suspensos</h3>
+            <div class="value">33.3%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Análisis por Materias -->
+      <div class="section">
+        <h2>📈 Rendimiento por Materias</h2>
+        <div class="chart-container">
+          <h3 style="text-align: center; margin-bottom: 20px">
+            Nota Media por Asignatura
+          </h3>
+          <div class="bars-wrapper">
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ATEDU (Atención Educativa)</span>
+                <span>9.5</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 95%">9.5</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>REL (Religión)</span>
+                <span>8.6</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 86%">8.6</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>IAE (Iniciación a la Actividad Emprendedora)</span>
+                <span>8.2</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 82%">8.2</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>FRA2 (Francés 2ª Lengua)</span>
+                <span>8.1</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 81%">8.1</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>CCL (Cultura Clásica)</span>
+                <span>7.8</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 78%">7.8</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>EPV (Ed. Plástica y Visual)</span>
+                <span>7.5</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 75%">7.5</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>TYD (Tecnología y Digitalización)</span>
+                <span>7.0</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 70%">7.0</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ACT (Ámbito Científico-Tecnológico)</span>
+                <span>7.0</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 70%">7.0</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ING (Inglés)</span>
+                <span>6.9</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 69%">6.9</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>MAT (Matemáticas)</span>
+                <span>6.7</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 67%">6.7</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>FYQ (Física y Química)</span>
+                <span>6.4</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 64%">6.4</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>OYD (Oratoria y Debate)</span>
+                <span>6.4</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 64%">6.4</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>GEH (Geografía e Historia)</span>
+                <span>6.3</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 63%">6.3</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>BYG (Biología y Geología)</span>
+                <span>6.3</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 63%">6.3</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ALS (Ámbito Lingüístico y Social)</span>
+                <span>6.3</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 63%">6.3</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>EFI (Educación Física)</span>
+                <span>6.0</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 60%">6.0</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>CYR (Computación y Robótica)</span>
+                <span>5.8</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 58%">5.8</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>LCL (Lengua Castellana)</span>
+                <span>5.4</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 54%">5.4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h3 style="text-align: center; margin-bottom: 20px">
+            Porcentaje de Suspensos por Asignatura
+          </h3>
+          <div class="bars-wrapper">
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>LCL (Lengua Castellana)</span>
+                <span class="fail">39.1%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 39.1%">9/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>EFI (Educación Física)</span>
+                <span class="fail">33.3%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 33.3%">9/27</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>FYQ (Física y Química)</span>
+                <span class="fail">30.4%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 30.4%">7/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>BYG (Biología y Geología)</span>
+                <span>26.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 26.0%">6/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>GEH (Geografía e Historia)</span>
+                <span>26.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 26.0%">6/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ING (Inglés)</span>
+                <span>26.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 26.0%">6/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ACT (Ámbito Científico-Tecnológico)</span>
+                <span>25%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 25%">1/4</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>ACT (Ámbito Socio-Lingüístico)</span>
+                <span>25%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 25%">1/4</div>
+              </div>
+            </div>
+
+
+
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>TYD (Tecnología y Digitalización)</span>
+                <span class="pass">10.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 10.0%">3/27</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>MAT (Matemáticas)</span>
+                <span class="pass">4.3%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 4.3%">1/23</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span>Resto de materias</span>
+                <span class="pass">0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 5%">Excelente</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas Críticas -->
+      <div class="section">
+        <h2>⚠️ Materias con Alto Índice de Suspensos</h2>
+
+        <div class="alert danger">
+          <h3>🔴 NIVEL CRÍTICO (>30% suspensos)</h3>
+          <table>
+            <tr>
+              <th>Materia</th>
+              <th>Media</th>
+              <th>% Suspensos</th>
+              <th>Alumnos Suspensos</th>
+            </tr>
+            <tr>
+              <td><strong>LCL (Lengua Castellana)</strong></td>
+              <td>5.4</td>
+              <td class="fail">39.1%</td>
+              <td>9 de 23</td>
+            </tr>
+            <tr>
+              <td><strong>EFI (Educación Física)</strong></td>
+              <td>6.0</td>
+              <td class="fail">33.3%</td>
+              <td>9 de 27</td>
+            </tr>
+            <tr>
+              <td><strong>FYQ (Física y Química)</strong></td>
+              <td>6.4</td>
+              <td class="fail">30.4%</td>
+              <td>7 de 23</td>
+            </tr>
+
+          </table>
+        </div>
+
+        <div class="alert">
+          <h3>🟡 NIVEL PREOCUPANTE (20-30% suspensos)</h3>
+          <table>
+            <tr>
+              <th>Materia</th>
+              <th>Media</th>
+              <th>% Suspensos</th>
+              <th>Alumnos Suspensos</th>
+            </tr>
+
+            <tr>
+              <td><strong>BYG (Biología y Geología)</strong></td>
+              <td>6.3</td>
+              <td class="fail">26.0%</td>
+              <td>6 de 23</td>
+            </tr>
+            <tr>
+              <td><strong>GEH (Geografía e Historia)</strong></td>
+              <td>6.3</td>
+              <td class="fail">26.0%</td>
+              <td>6 de 23</td>
+            </tr>
+
+            <tr>
+              <td><strong>ING (Inglés)</strong></td>
+              <td>6.9</td>
+              <td class="fail">26.0%</td>
+              <td>6 de 23</td>
+            </tr>
+            <tr>
+              <td><strong>ACT (Ámbito Científico-Tecnológico)</strong></td>
+              <td>7.0</td>
+              <td class="fail">25.0%</td>
+              <td>1 de 4</td>
+            </tr>
+            <tr>
+              <td><strong>ASL (Ámbito Socio-Lingüístico)</strong></td>
+              <td>6.3</td>
+              <td class="fail">25.0%</td>
+              <td>1 de 4</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="alert" style="background: #d1ecf1; border-left-color: #17a2b8">
+          <h3 style="color: #0c5460">🔵 NIVEL MODERADO (10-20% suspensos)</h3>
+          <table>
+            <tr>
+              <th>Materia</th>
+              <th>Media</th>
+              <th>% Suspensos</th>
+              <th>Alumnos Suspensos</th>
+            </tr>
+            <tr>
+              <td><strong>TYD (Tecnología y Digitalización)</strong></td>
+              <td>7.0</td>
+              <td>10.0%</td>
+              <td>3 de 27</td>
+            </tr>
+            <tr>
+              <td><strong>MAT (Matemáticas)</strong></td>
+              <td>6.7</td>
+              <td>4.3%</td>
+              <td>1 de 23</td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📊 Distribución de Suspensos en el Grupo</h2>
+        <div class="chart-container">
+          <h3 style="text-align: center; margin-bottom: 20px">
+            Análisis de Suspensos por Alumno
+          </h3>
+          <div class="bars-wrapper">
+            <div class="bar-item">
+              <div class="bar-label">
+                <span><strong>0 Suspensos</strong> (Rendimiento Óptimo)</span>
+                <span class="pass">51.8%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 51.8%">14 alumnos</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span><strong>1 Suspenso</strong> (Situación Controlada)</span>
+                <span class="pass">10.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-green" style="width: 10.0%">3 alumnos</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span><strong>2 Suspensos</strong> (Requiere Seguimiento)</span>
+                <span>3.7%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-yellow" style="width: 3.7%">1 alumnos</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span><strong>3-4 Suspensos</strong> (Atención Urgente)</span>
+                <span class="fail">10.0%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 10.0%">3 alumnos</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">
+                <span><strong>5+ Suspensos</strong> (Crítico)</span>
+                <span class="fail">18.5%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill bar-red" style="width: 18.5%">6 alumnos</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-radius: 10px">
+            <p style="font-weight: bold; color: #1565c0">📊 Resumen Acumulado:</p>
+            <ul style="margin-left: 20px; margin-top: 10px; color: #1565c0">
+              <li>Con <strong>0 suspensos:</strong> 14 alumnos (51.8%)</li>
+              <li>Con <strong>0-1 suspensos:</strong> 17 alumnos (62.9%)</li>
+              <li>Con <strong>0-2 suspensos:</strong> 18 alumnos (66.6%)</li>
+              <li>Con <strong>3-4 suspensos:</strong> 3 alumnos (11%) - Atención prioritaria</li>
+              <li>Con <strong>5+ suspensos:</strong> 6 alumnos (22.2%) - Situación crítica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📊 Atención a la Diversidad</h2>
+        <div class="conclusion">
+          <h3>Eficacia de los Programas de Refuerzo del Aprendizaje</h3>
+          <h4>Alumnos/as con Necesidades Educativas Especiales (NEE)</h4>
+          <p>
+            Hay 3 alumnos/as que siguen Programas de Refuerzo del Aprendizaje.
+            La eficacia de los Programas ha sido del 100% en la materia de Tecnología y Digitalización, del
+            50 % en las materias de Inglés, Matemáticas y Geografía e Historia, y del 0% en las materias de
+            Lengua y Física y Química.
+            Procede una valoración/revisión de los programas de refuerzo al alumnado repetidor, de cara
+            a la segunda evaluación, y potenciar la acción tutorial y del departamento de orientación en
+            esos casos.
+            Hay 7 alumnos que no superan varias materias, por lo que habría que plantearse la realización
+            de un Programa de Refuerzo en esos casos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Conclusiones -->
+      <div class="section">
+        <h2>💡 Conclusiones del Análisis</h2>
+
+        <div class="conclusion">
+          <h3>Diagnóstico General</h3>
+          <p>
+            El grupo 3º ESO B presenta un rendimiento académico positivo con
+            una media de 6.8. Del total de 27 alumnos: 14 (51.8%) no tienen
+            ningún suspenso, 3 alumnos (10.0%) tienen 1 suspenso, 1 alumno
+            (3.7%) tienen 2 suspensos y 4 alumnos (10.0%) tienen 3 y 4 suspensos.
+            Esto significa que el <strong>66.6%</strong> del grupo tiene entre 0 y 2
+            suspensos, un resultado satisfactorio, aunque existe un grupo
+            significativo <strong>(33.4%)</strong> en situación de riesgo que requiere atención
+            urgente.
+          </p>
+        </div>
+
+        <div class="conclusion">
+          <h3>Principales Problemáticas Identificadas</h3>
+
+          <p>
+            <strong>1. LEN (Lengua y Literatura), EFI (Educación Física) y FYQ (Física y Química), se
+              encuentran en Situación Crítica:</strong>
+            LEN es la materia más preocupante con un 39.1% de suspensos (9 de 23
+            alumnos) y una media de 5.4. EFI (Educación Física) presenta un 33.3% de suspensos (9 de 27
+            alumnos) y una media de 6.0 y FYQ (Física y Química) presenta un 30.4% de suspensos (7 de 23 alumnos).
+            Resultados que evidencian una situación especialmente delicada en varias materias, aunque con distinto grado
+            de
+            preocupación. Lengua y Literatura se configura como el foco principal de alerta, no solo por concentrar el
+            mayor porcentaje de suspensos, sino porque su media refleja dificultades generalizadas que trascienden casos
+            aislados, lo que apunta a problemas de comprensión y expresión que afectan al conjunto del aprendizaje.
+            Educación Física y Física y Química, aunque con medias ligeramente superiores, muestran también un volumen
+            significativo de alumnado no superado que sugiere falta de consolidación de contenidos y, en el caso de FyQ,
+            posibles carencias en la base científica previa; sin embargo, su situación resulta algo menos alarmante que
+            la de LEN, aunque requiere igualmente una intervención pedagógica ajustada y coordinada.
+          </p>
+
+          <p>
+            <strong>2. BYG (Biología y Geología), GEH (Geografía e Historia) e ING (Inglés) con Dificultades
+              Importantes:</strong>
+            presentan un 26.0% de suspensos (6 de 23 alumnos) con media de 6.3. ACT (Ámbito Científico-Tecnológico)
+            y ASL (Ámbito Socio-Lingüístico) con un 25.0% de suspensos (1 de 4 alumnos) y medias de 7.0 y 6.3
+            respectivamente.
+            Estas materias muestran un nivel de dificultad considerable, con un porcentaje de suspensos que, aunque
+            no alcanza el umbral crítico, sí indica la presencia de barreras significativas para una parte del alumnado.
+          </p>
+
+
+        </div>
+
+        <div class="conclusion">
+          <h3>Factores Fortalezas del grupo</h3>
+          <p>
+            A pesar de las dificultades en algunas materias instrumentales, el
+            grupo muestra fortalezas importantes. El 51.8% del alumnado no
+            tiene ningún suspenso, demostrando que existe una base sólida de
+            alumnos y alumnas con buen rendimiento.
+          </p>
+
+          <p>
+            Materias como IAE (8.2), ATEDU (9.5), FRA2 (8.1), REL (8.6), CCL
+            (7.8), EPV (7.5) y TYD (7.0) muestran
+            resultados muy positivos, indicando que el grupo responde bien a
+            metodologías prácticas, proyectos y contenidos aplicados. Esta
+            información es fundamental para diseñar estrategias de mejora en
+            las materias con dificultades, replicando enfoques exitosos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Propuestas de Mejora -->
+      <div class="proposals">
+        <h3>📊 SEGUIMIENTO Y EVALUACIÓN DE MEDIDAS</h3>
+        <ul>
+          <li>
+            <strong>Indicadores de Éxito para el 2º Trimestre:</strong> (1)
+            Reducir suspensos en LCL, EFI y FYQ al 20% o menos, (2) Que ningún
+            alumno/a tenga más de 5 suspensos, (3) Que los 6 alumnos críticos
+            reduzcan sus suspensos a 5 como máximo, (4) Aumentar media del
+            grupo en materias críticas en al menos 1.0 punto, (5) Que al menos
+            2 de los 3 casos graves recuperen a nivel de 0-2 suspensos.
+          </li>
+          <li>
+            <strong>Seguimiento académico individualizado (ENERO):</strong>
+            Realizar pruebas de nivel detalladas en LCL, EFI y FYQ durante la
+            primera semana de enero (contenidos de 1º y 2º ESO) para
+            establecer línea base precisa, detectar lagunas específicas y
+            diseñar planes de refuerzo totalmente personalizados.
+          </li>
+          <li>
+            <strong>Informe Quincenal:</strong> Realizar seguimiento
+            individualizado muy detallado cada 15 días de cada uno de los 4
+            alumnos/as críticos, con reunión del equipo docente completo para
+            valorar eficacia de medidas, compartir observaciones y realizar
+            ajustes inmediatos.
+          </li>
+          <li>
+            <strong>Registro Exhaustivo Diario de Intervenciones:</strong>
+            Documentar diariamente en ficha individual digital todas las
+            acciones realizadas con cada ALUMNO/A en riesgo (asistencia a
+            refuerzos, tareas entregadas, evaluaciones, reuniones con familia,
+            incidencias, observaciones compartidas), para evaluar con
+            precisión qué estrategias funcionan y realizar análisis al final
+            del trimestre .
+          </li>
+          <li>
+            <strong>Encuestas de Satisfacción y Evaluación:</strong> Realizar
+            cuestionarios anónimos detallados al alumnado, familias y
+            profesorado cada mes para conocer percepción sobre las medidas,
+            detectar necesidades no cubiertas, identificar obstáculos y
+            ajustar el plan de forma ágil y participativa.
+          </li>
+          <li>
+            <strong>Informe de Progreso Mensual:</strong> Elaborar informe
+            mensual detallado de cada alumno/a en riesgo con gráficas de
+            evolución, análisis comparativo con evaluaciones anteriores y
+            propuestas de continuidad o modificación de medidas e informar a
+            las familias sobre el progreso.
+          </li>
+        </ul>
+      </div>
+      <!-- Aspectos Positivos -->
+      <div class="section">
+        <h2>✅ Fortalezas del Grupo</h2>
+        <div class="conclusion" style="background: #d4edda; border-left-color: #28a745">
+          <h3 style="color: #155724">Materias con Excelente Rendimiento</h3>
+          <p>
+            A pesar de las dificultades en algunas materias instrumentales, el
+            grupo 3B muestra fortalezas aceptables:
+          </p>
+          <ul style="margin-left: 20px; margin-top: 10px; color: #155724">
+            <li>
+              <strong>ATEDU (Atención Educativa):</strong> 9.5 de media -
+              Rendimiento sobresaliente - 100% aprobados.
+            </li>
+            <li>
+              <strong>FRA2 (Francés):</strong> 8.1 de media - 100% aprobados.
+              Excelente capacidad lingüística en segunda lengua extranjera.
+            </li>
+            <li>
+              <strong>IAE (Iniciativa de la Actividad Emprendedora):</strong>
+              8.2 de media - Gran capacidad para proyectos prácticos - 100%
+              aprobados.
+            </li>
+            <li>
+              <strong>REL (Religión):</strong> 8.6 de media - Excelente - 100%
+              aprobados.
+            </li>
+            <li>
+              <strong>TYD (Tecnología y Digitalización):</strong> 8.0 de media
+              - 100% aprobados.
+            </li>
+            <li>
+              <strong>CCL (Cultura Clásica):</strong> 7.0 de media - 100%
+              aprobados.
+            </li>
+          </ul>
+          <p style="margin-top: 15px">
+            <strong>Conclusión positiva:</strong> El 59.2% del alumnado no
+            tiene ningún suspenso, demostrando que existe un grupo sólido con
+            capacidad y hábitos de estudio. Las metodologías empleadas en
+            ATEDU, IAEE, FRA2, TYD, CCL y REL (todas con 0% o muy bajo porcentaje de
+            suspensos) están funcionando muy bien y deben analizarse para
+            replicar estrategias en LCL, EFI y FYQ. La clave está en
+            metodologías activas, proyectos prácticos y evaluación
+            diversificada que conecte con la realidad del alumnado.
+          </p>
+        </div>
+      </div>
+
+      <!-- Resumen Final -->
+      <div class="section">
+        <h2>📌 Resumen GENERAL de Actuación</h2>
+        <div class="conclusion" style="background: #fff3cd; border-left-color: #ffc107">
+          <h3 style="color: #856404">
+            Prioridades para el Segundo Trimestre
+          </h3>
+
+          <p style="margin-top: 20px; font-weight: bold">
+            El panorama del grupo 3A es dual: el 59.2% no tiene suspensos
+            (situación muy positiva), pero el 14.8% tiene 4 o más suspensos
+            (situación crítica que requiere intervención urgente e intensiva).
+            Sin medidas inmediatas y efectivas, existe riesgo real de que 1-2
+            alumnos no promocionen a 4º ESO. Con las medidas propuestas,
+            implementadas con rigurosidad y seguimiento muy cercano, estos
+            casos son recuperables, aunque requerirá esfuerzo coordinado de
+            todo el equipo educativo y compromiso firme de las familias.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
