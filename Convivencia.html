@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Comparativo de Convivencia - Segundo Trimestre</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 40px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #1e40af;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #64748b;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+      h3 {
+        color: #1e293b;
+        font-size: 1.8em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 3px solid #3b82f6;
+        padding-bottom: 10px;
+      }
+      h4 {
+        color: #475569;
+        font-size: 1.2em;
+        margin-top: 15px;
+        margin-bottom: 8px;
+      }
+      .header-line {
+        height: 4px;
+        width: 150px;
+        background-color: #3b82f6;
+        margin: 20px 0 30px 0;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .stat-card {
+        padding: 25px;
+        border-radius: 8px;
+        border-left: 5px solid;
+      }
+      .stat-card.leves {
+        background-color: #dbeafe;
+        border-color: #3b82f6;
+      }
+      .stat-card.graves {
+        background-color: #fef3c7;
+        border-color: #f59e0b;
+      }
+      .stat-number {
+        font-size: 3em;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .stat-card.leves .stat-number {
+        color: #3b82f6;
+      }
+      .stat-card.graves .stat-number {
+        color: #f59e0b;
+      }
+      .stat-label {
+        color: #64748b;
+        font-size: 0.9em;
+      }
+      .comparison-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: bold;
+        margin-top: 8px;
+      }
+      .badge-success {
+        background-color: #10b981;
+        color: white;
+      }
+      .badge-warning {
+        background-color: #f59e0b;
+        color: white;
+      }
+      .badge-danger {
+        background-color: #ef4444;
+        color: white;
+      }
+      .chart-container {
+        margin: 30px 0;
+        padding: 20px;
+        background-color: #f8fafc;
+        border-radius: 8px;
+      }
+      canvas {
+        max-height: 400px;
+      }
+      .findings-list {
+        list-style: none;
+        margin: 20px 0;
+      }
+      .findings-list li {
+        margin: 15px 0;
+        padding-left: 30px;
+        position: relative;
+      }
+      .findings-list li:before {
+        content: "●";
+        position: absolute;
+        left: 0;
+        font-size: 1.5em;
+      }
+      .findings-list li:nth-child(1):before {
+        color: #ef4444;
+      }
+      .findings-list li:nth-child(2):before {
+        color: #f59e0b;
+      }
+      .findings-list li:nth-child(3):before {
+        color: #10b981;
+      }
+      .findings-list li:nth-child(4):before {
+        color: #3b82f6;
+      }
+      .findings-list li:nth-child(5):before {
+        color: #8b5cf6;
+      }
+      .highlight-box {
+        background-color: #fef3c7;
+        border: 2px solid #f59e0b;
+        padding: 25px;
+        margin: 25px 0;
+        border-radius: 8px;
+      }
+      .highlight-box h4 {
+        color: #92400e;
+        margin-top: 0;
+      }
+      .highlight-box ul {
+        margin-top: 10px;
+        margin-left: 20px;
+      }
+      .highlight-box p {
+        margin-top: 15px;
+      }
+      .success-box {
+        background-color: #d1fae5;
+        border: 2px solid #10b981;
+        padding: 25px;
+        margin: 25px 0;
+        border-radius: 8px;
+      }
+      .success-box h4 {
+        color: #065f46;
+        margin-top: 0;
+      }
+      .pedagogical-proposals {
+        background-color: #ecfdf5;
+        padding: 30px;
+        border-radius: 8px;
+        margin: 30px 0;
+        border: 2px solid #10b981;
+      }
+      .proposal-item {
+        background-color: white;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .proposal-item h5 {
+        color: #059669;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+      .footer {
+        margin-top: 50px;
+        padding-top: 20px;
+        border-top: 2px solid #e2e8f0;
+        text-align: center;
+        color: #94a3b8;
+        font-size: 0.9em;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      th {
+        background-color: #f1f5f9;
+        color: #1e293b;
+        font-weight: 600;
+      }
+      tr:hover {
+        background-color: #f8fafc;
+      }
+      .comparison-table {
+        margin: 30px 0;
+      }
+      .arrow-up {
+        color: #ef4444;
+        font-weight: bold;
+      }
+      .arrow-down {
+        color: #10b981;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Informe Comparativo de Convivencia Escolar</h1>
+      <h2>Análisis Primer vs Segundo Trimestre - Curso 2025/2026</h2>
+      <div class="header-line"></div>
+
+      <h3>1. Resumen y Comparativa Global</h3>
+
+      <div class="stats-grid">
+        <div class="stat-card leves">
+          <div class="stat-label">Conductas Leves - 2º Trimestre</div>
+          <div class="stat-number">62</div>
+          <div class="comparison-badge badge-danger">
+            +93.8% vs 1º Trim (32)
+          </div>
+        </div>
+        <div class="stat-card graves">
+          <div class="stat-label">Conductas Graves - 2º Trimestre</div>
+          <div class="stat-number">23</div>
+          <div class="comparison-badge badge-success">
+            -23.3% vs 1º Trim (30)
+          </div>
+        </div>
+      </div>
+
+      <div class="success-box">
+        <h4>✅ LOGRO IMPORTANTE: Reducción de Conductas Graves</h4>
+        <p>
+          Se ha conseguido reducir las
+          <strong>conductas graves en un 23.3%</strong> (de 30 a 23
+          incidencias), lo que indica que las medidas preventivas y de
+          intervención del primer trimestre han tenido efecto positivo en la
+          reducción de conflictos severos.
+        </p>
+      </div>
+
+      <div class="highlight-box">
+        <h4>⚠️ ALERTA: Incremento Significativo de Conductas Leves</h4>
+        <p>
+          Sin embargo, las <strong>conductas leves se han duplicado</strong>,
+          pasando de 32 a 62 incidencias (+93.8%). Este aumento sugiere:
+        </p>
+        <ul>
+          <li>
+            Mayor registro y visibilización de conductas menores (aspecto
+            positivo de detección temprana)
+          </li>
+          <li>Posible relajación en normas básicas de convivencia</li>
+          <li>Necesidad de reforzar la prevención y normas de aula</li>
+        </ul>
+      </div>
+
+      <h3>2. Análisis Comparativo por Curso</h3>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Curso</th>
+              <th>1º Trim Total</th>
+              <th>2º Trim Total</th>
+              <th>Variación</th>
+              <th>% Cambio</th>
+              <th>Valoración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1ºA</strong></td>
+              <td>5</td>
+              <td>10</td>
+              <td class="arrow-up">+5</td>
+              <td>+100%</td>
+              <td>⚠️ Empeoramiento significativo</td>
+            </tr>
+            <tr>
+              <td><strong>1ºB</strong></td>
+              <td>1</td>
+              <td>4</td>
+              <td class="arrow-up">+3</td>
+              <td>+300%</td>
+              <td>⚠️ Deterioro notable</td>
+            </tr>
+            <tr>
+              <td><strong>1ºC</strong></td>
+              <td>5</td>
+              <td>2</td>
+              <td class="arrow-down">-3</td>
+              <td>-60%</td>
+              <td>✅ Mejora destacable</td>
+            </tr>
+            <tr>
+              <td><strong>2ºA</strong></td>
+              <td>19</td>
+              <td>12</td>
+              <td class="arrow-down">-7</td>
+              <td>-36.8%</td>
+              <td>✅ Mejora muy significativa</td>
+            </tr>
+            <tr>
+              <td><strong>2ºB</strong></td>
+              <td>8</td>
+              <td>14</td>
+              <td class="arrow-up">+6</td>
+              <td>+75%</td>
+              <td>⚠️ Empeoramiento importante</td>
+            </tr>
+            <tr>
+              <td><strong>3ºA</strong></td>
+              <td>8</td>
+              <td>27</td>
+              <td class="arrow-up">+19</td>
+              <td>+237.5%</td>
+              <td>🔴 CRISIS - Empeoramiento crítico</td>
+            </tr>
+            <tr>
+              <td><strong>3ºB</strong></td>
+              <td>8</td>
+              <td>10</td>
+              <td class="arrow-up">+2</td>
+              <td>+25%</td>
+              <td>⚠️ Empeoramiento moderado</td>
+            </tr>
+            <tr>
+              <td><strong>4ºA</strong></td>
+              <td>13</td>
+              <td>7</td>
+              <td class="arrow-down">-6</td>
+              <td>-46.2%</td>
+              <td>✅ Mejora muy significativa</td>
+            </tr>
+            <tr>
+              <td><strong>4ºB</strong></td>
+              <td>8</td>
+              <td>8</td>
+              <td>0</td>
+              <td>0%</td>
+              <td>➡️ Estabilidad</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. Gráficos Comparativos</h3>
+
+      <div class="chart-container">
+        <canvas id="chartComparativo"></canvas>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="chartTipoIncidencias"></canvas>
+      </div>
+
+      <h3>4. Principales Datos</h3>
+      <ul class="findings-list">
+        <li>
+          <strong>3ºA en situación crítica</strong>: Ha pasado de 8 a 27
+          incidencias (+237.5%), convirtiéndose en el grupo más problemático del
+          centro. Requiere intervención inmediata y análisis profundo de las
+          causas.
+        </li>
+
+        <li>
+          <strong>2ºA muestra la mayor mejora</strong>: De ser el grupo más
+          conflictivo en el 1º trimestre (19 incidencias) ha reducido a 12
+          (-36.8%), demostrando que las medidas implementadas fueron efectivas.
+        </li>
+
+        <li>
+          <strong>Mejoras destacables en 4º ESO</strong>: Tanto 4ºA (-46.2%)
+          como 4ºB (estable) muestran madurez y mejor gestión de conflictos,
+          posiblemente por mayor conciencia ante el final de etapa.
+        </li>
+
+        <li>
+          <strong>Preocupación en 1º ESO</strong>: Los grupos 1ºA y 1ºB han
+          empeorado significativamente, sugiriendo dificultades en la adaptación
+          al segundo trimestre o relajación tras el periodo inicial.
+        </li>
+
+        <li>
+          <strong>Patrón general positivo en conductas graves</strong>: La
+          reducción del 23.3% en conductas graves indica que se están
+          previniendo las escaladas de conflictos más serios.
+        </li>
+      </ul>
+
+      <h3>5. Análisis por Nivel Educativo</h3>
+
+      <div class="chart-container">
+        <canvas id="chartNiveles"></canvas>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>1º Trimestre</th>
+            <th>2º Trimestre</th>
+            <th>Variación</th>
+            <th>Análisis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1º ESO</strong></td>
+            <td>11</td>
+            <td>16</td>
+            <td class="arrow-up">+5 (+45.5%)</td>
+            <td>Empeoramiento. Necesita refuerzo en normas básicas</td>
+          </tr>
+          <tr>
+            <td><strong>2º ESO</strong></td>
+            <td>27</td>
+            <td>26</td>
+            <td class="arrow-down">-1 (-3.7%)</td>
+            <td>Estabilidad con ligera mejora</td>
+          </tr>
+          <tr>
+            <td><strong>3º ESO</strong></td>
+            <td>16</td>
+            <td>37</td>
+            <td class="arrow-up">+21 (+131.3%)</td>
+            <td>🔴 CRISIS - Requiere intervención urgente</td>
+          </tr>
+          <tr>
+            <td><strong>4º ESO</strong></td>
+            <td>21</td>
+            <td>15</td>
+            <td class="arrow-down">-6 (-28.6%)</td>
+            <td>✅ Mejora significativa - Modelo a seguir</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <h4>🎯 OBJETIVOS A CORTO PLAZO (Tercer Trimestre)</h4>
+        <p><strong>Objetivos cuantificables para el 3º Trimestre:</strong></p>
+        <ul>
+          <li>
+            <strong>OBJETIVO 1:</strong> Reducir las conductas leves en 3º ESO
+            al menos un 40% (de 27 a menos de 16 incidencias)
+          </li>
+          <li>
+            <strong>OBJETIVO 2:</strong> Mantener la tendencia positiva en
+            conductas graves, objetivo: reducción adicional del 15% (de 23 a
+            menos de 20)
+          </li>
+          <li>
+            <strong>OBJETIVO 3:</strong> Estabilizar 1º ESO en niveles del 1º
+            trimestre (objetivo: menos de 12 incidencias totales)
+          </li>
+          <li>
+            <strong>OBJETIVO 4:</strong> Conseguir que al menos 5 de los 9
+            grupos reduzcan sus incidencias respecto al 2º trimestre
+          </li>
+          <li>
+            <strong>OBJETIVO 5:</strong> Ningún grupo debe superar las 15
+            incidencias totales en el 3º trimestre
+          </li>
+        </ul>
+      </div>
+
+      <h3>6. Plan de Acción Urgente para el Tercer Trimestre</h3>
+
+      <div class="pedagogical-proposals">
+        <p style="margin-bottom: 20px">
+          <strong>Medidas específicas por grupos y generales:</strong>
+        </p>
+
+        <div class="proposal-item">
+          <h5>🔴 PRIORIDAD MÁXIMA: Intervención en 3º ESO A</h5>
+          <p>
+            <strong>Situación:</strong> Incremento del 237.5% (de 8 a 27
+            incidencias)
+          </p>
+          <p><strong>Medidas urgentes:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              Reunión extraordinaria con el equipo docente de 3ºA y establecer
+              protocolos de actuación.
+            </li>
+            <li>
+              Análisis individualizado de cada incidencia para detectar patrones
+              y alumnos/as reincidentes
+            </li>
+            <li>
+              Sugerimos reunión urgente con familias de alumnos con 2 o más
+              incidencias
+            </li>
+
+            <li>
+              Contrato de convivencia grupal con compromisos firmados por todo
+              el alumnado y establecer posibles sanciones en caso de no cumplir
+              dicho compromiso.
+            </li>
+            <li>
+              Sugerencia de refuerzo positivo: sistema de privilegios por
+              semanas sin incidencias.
+            </li>
+          </ul>
+        </div>
+
+        <div class="proposal-item">
+          <h5>⚠️ ALTA PRIORIDAD: Estabilización de 1º ESO (A y B)</h5>
+          <p>
+            <strong>Situación:</strong> Incrementos del 100% en 1ºA y 300% en
+            1ºB
+          </p>
+          <p><strong>Medidas:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              Refuerzo de normas básicas de convivencia: revisión semanal en
+              tutoría
+            </li>
+
+            <li>
+              Observaciones compartidas semanales con familias (tanto positivas
+              como negativas)
+            </li>
+
+            <li>
+              Publicar en el tablón de anuncios del aula las incidencias de
+              grupo y las posibles sanciones a llevar a cabo.
+            </li>
+          </ul>
+        </div>
+
+        <div class="proposal-item">
+          <h5>✅ CONSOLIDAR BUENAS PRÁCTICAS: Replicar éxito de 2ºA y 4ºA</h5>
+          <p>
+            <strong>Situación:</strong> 2ºA ha mejorado un 36.8% y 4ºA un 46.2%
+          </p>
+          <p><strong>Acción:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              Reunión con tutores de 2ºA y 4ºA para identificar qué estrategias
+              han funcionado.
+            </li>
+            <li>
+              Sesión de intercambio de buenas prácticas con todos los tutores
+              del centro
+            </li>
+            <li>
+              Documentar y compartir las estrategias exitosas en documento para
+              todo el equipo
+            </li>
+            <li>
+              Reconocimiento público a estos grupos en este tercer trimestre
+            </li>
+          </ul>
+        </div>
+
+        <div class="proposal-item">
+          <h5>📊 MEDIDA TRANSVERSAL: Reducir Conductas Leves Generales</h5>
+          <p>
+            <strong>Situación:</strong> Aumento del 93.8% en conductas leves (de
+            32 a 62)
+          </p>
+          <p><strong>Estrategias preventivas:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              <strong>Prevención:</strong> Campaña de convivencia positiva en
+              marzo (carteles, videos, dinámicas)
+            </li>
+            <li>
+              <strong>Normas visuales:</strong> Cada aula debe tener visible el
+              "Decálogo de Convivencia" creado por el alumnado
+            </li>
+            <li>
+              <strong>Refuerzo positivo masivo: </strong>Reforzar y potenciar el
+              refuerzo positivo para aquellos grupos que trabajen por una
+              convivencia sin incidencias.
+            </li>
+            <li>
+              <strong>Recreos activos e integradores:</strong> Organizar
+              actividades y deportes dirigidas en recreos para reducir
+              conflictos
+            </li>
+          </ul>
+        </div>
+
+        <div class="proposal-item">
+          <h5>👨‍👩‍👧 MEDIDA CLAVE: Intensificar Comunicación con Familias</h5>
+          <p><strong>Observaciones compartidas sistemáticas:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              Comunicación SEMANAL obligatoria para grupos con más de 15
+              incidencias (3ºA, 2ºB)
+            </li>
+            <li>
+              Comunicación QUINCENAL para grupos con 10-15 incidencias (1ºA,
+              2ºA, 3ºB)
+            </li>
+
+            <li>Reuniones presenciales con familias de alumnado reincidente</li>
+          </ul>
+        </div>
+
+        <div class="proposal-item">
+          <h5>🎯 INDICADORES DE ÉXITO - Cómo sabremos que funciona</h5>
+          <p><strong>Indicadores de seguimiento semanal:</strong></p>
+          <ul style="margin-left: 20px; margin-top: 8px">
+            <li>
+              Número de incidencias leves y graves por semana (objetivo:
+              tendencia descendente)
+            </li>
+            <li>
+              Número de alumnos reincidentes (objetivo: reducción del 30%)
+            </li>
+            <li>
+              Porcentaje de incidencias resueltas mediante mediación (objetivo:
+              >40%)
+            </li>
+            <li>
+              Satisfacción del profesorado con clima de convivencia (encuesta)
+            </li>
+            <li>
+              Número de "reconocimientos positivos" emitidos (objetivo: superar
+              número de incidencias)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>7. Conclusiones y Valoración Global</h3>
+
+      <div class="success-box">
+        <h4>✅ ASPECTOS POSITIVOS</h4>
+        <ul style="margin-left: 20px; margin-top: 10px">
+          <li>
+            Reducción significativa de conductas graves (-23.3%), demostrando
+            eficacia en prevención de conflictos severos
+          </li>
+          <li>
+            Mejoras destacables en 2ºA (-36.8%), 4ºA (-46.2%) y 1ºC (-60%)
+          </li>
+          <li>4º ESO muestra madurez y responsabilidad global</li>
+          <li>
+            Las medidas del 1º trimestre han tenido impacto positivo en varios
+            grupos
+          </li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <h4>⚠️ ASPECTOS PREOCUPANTES</h4>
+        <ul style="margin-left: 20px; margin-top: 10px">
+          <li>
+            Incremento global de conductas leves (+93.8%) indica necesidad de
+            reforzar prevención
+          </li>
+          <li>
+            3º ESO en situación crítica, especialmente 3ºA con incremento del
+            237.5%
+          </li>
+          <li>
+            Deterioro en 1º ESO (grupos A y B) sugiere necesidad de ajustar
+            estrategias con alumnado de menor edad
+          </li>
+          <li>
+            Inconsistencia entre grupos del mismo nivel (ej: 1ºC mejora mientras
+            1ºA y 1ºB empeoran)
+          </li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 25px; line-height: 1.8">
+        <strong>Valoración final:</strong> El segundo trimestre presenta una
+        situación mixta. Si bien se ha conseguido reducir las conductas más
+        graves (un logro importante), el aumento de conductas leves y el
+        deterioro crítico de 3ºA requieren actuación inmediata. El tercer
+        trimestre será decisivo para consolidar las mejoras en los grupos que
+        han progresado y revertir las tendencias negativas en los grupos
+        problemáticos. Con las medidas propuestas, objetivos claros y
+        seguimiento sistemático, es factible conseguir una mejora generalizada
+        antes del final de curso.
+      </p>
+
+      <div class="footer">
+        <p>Informe Comparativo de Convivencia - Segundo Trimestre 2024/2025</p>
+        <p>Informe 14 de abril de 2026</p>
+      </div>
+    </div>
+
+    <script>
+      // Gráfico comparativo 1º vs 2º trimestre por curso
+      const ctx1 = document.getElementById("chartComparativo").getContext("2d");
+      new Chart(ctx1, {
+        type: "bar",
+        data: {
+          labels: [
+            "1ºA",
+            "1ºB",
+            "1ºC",
+            "2ºA",
+            "2ºB",
+            "3ºA",
+            "3ºB",
+            "4ºA",
+            "4ºB",
+          ],
+          datasets: [
+            {
+              label: "1º Trimestre",
+              data: [5, 1, 5, 19, 8, 8, 8, 13, 8],
+              backgroundColor: "rgba(59, 130, 246, 0.7)",
+              borderColor: "rgba(59, 130, 246, 1)",
+              borderWidth: 1,
+            },
+            {
+              label: "2º Trimestre",
+              data: [10, 4, 2, 12, 14, 27, 10, 7, 8],
+              backgroundColor: "rgba(245, 158, 11, 0.7)",
+              borderColor: "rgba(245, 158, 11, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Comparativa de Incidencias por Curso: 1º vs 2º Trimestre",
+              font: { size: 16 },
+            },
+            legend: { position: "top" },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Número de Incidencias" },
+            },
+          },
+        },
+      });
+
+      // Gráfico tipo de incidencias
+      const ctx2 = document
+        .getElementById("chartTipoIncidencias")
+        .getContext("2d");
+      new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: ["Conductas Leves", "Conductas Graves"],
+          datasets: [
+            {
+              label: "1º Trimestre",
+              data: [32, 30],
+              backgroundColor: "rgba(59, 130, 246, 0.7)",
+            },
+            {
+              label: "2º Trimestre",
+              data: [62, 23],
+              backgroundColor: "rgba(245, 158, 11, 0.7)",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Evolución por Tipo de Conducta",
+              font: { size: 16 },
+            },
+            legend: { position: "top" },
+          },
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+
+      // Gráfico por niveles
+      const ctx3 = document.getElementById("chartNiveles").getContext("2d");
+      new Chart(ctx3, {
+        type: "line",
+        data: {
+          labels: ["1º ESO", "2º ESO", "3º ESO", "4º ESO"],
+          datasets: [
+            {
+              label: "1º Trimestre",
+              data: [11, 27, 16, 21],
+              borderColor: "rgba(59, 130, 246, 1)",
+              backgroundColor: "rgba(59, 130, 246, 0.2)",
+              tension: 0.3,
+              fill: true,
+            },
+            {
+              label: "2º Trimestre",
+              data: [16, 26, 37, 15],
+              borderColor: "rgba(245, 158, 11, 1)",
+              backgroundColor: "rgba(245, 158, 11, 0.2)",
+              tension: 0.3,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Evolución por Nivel Educativo",
+              font: { size: 16 },
+            },
+            legend: { position: "top" },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Total Incidencias" },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
