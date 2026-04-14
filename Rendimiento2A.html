@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Estadístico de Calificaciones - 2°A</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #34495e;
+      --accent: #3498db;
+      --critical: #e74c3c;
+      --warning: #f39c12;
+      --moderate: #f1c40f;
+      --success: #27ae60;
+      --bg: #f4f7f6;
+      --text: #333;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: var(--secondary);
+      border-left: 5px solid var(--accent);
+      padding-left: 15px;
+      margin-top: 30px;
+      background: #f9f9f9;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card span {
+      display: block;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .status-box {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .critical-bg {
+      background-color: var(--critical);
+    }
+
+    .warning-bg {
+      background-color: var(--warning);
+    }
+
+    .moderate-bg {
+      background-color: var(--moderate);
+      color: #333;
+    }
+
+    .success-bg {
+      background-color: var(--success);
+    }
+
+    .conclusion-block {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .list-style {
+      padding-left: 20px;
+    }
+
+    .list-style li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Informe de Calificaciones - 2° Trimestre</h1>
+    <p style="text-align: center; font-weight: bold">
+      Grupo: 2°A | Curso Escolar 25/26
+    </p>
+
+    <div class="summary-grid">
+      <div class="card">
+        N° Alumnos
+        <span>23</span>
+      </div>
+      <div class="card">
+        Media del Grupo
+        <span>7,42</span>
+      </div>
+      <div class="card">
+        0 Suspensos (%)
+        <span>56,52%</span>
+      </div>
+      <div class="card">
+        0-2 Suspensos (%)
+        <span>78,26%</span>
+      </div>
+    </div>
+
+    <h2>Rendimiento por Materias (Orden Descendente de Media)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Materia</th>
+          <th>Media</th>
+          <th>N° Suspensos</th>
+          <th>% Suspensos (Matriculados)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Atención Educativa (ATEDU)</td>
+          <td>10,00</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Francés (FRA2)</td>
+          <td>9,29</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Religión (REL)</td>
+          <td>8,95</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Valores Cívicos (VCE)</td>
+          <td>8,30</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Geografía e Historia (GEH)</td>
+          <td>7,91</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+        <tr>
+          <td>Educación Plástica (PEPA)</td>
+          <td>7,90</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Música (MUS)</td>
+          <td>7,87</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+        <tr>
+          <td>Cultura y Robótica (CYR)</td>
+          <td>7,83</td>
+          <td>0</td>
+          <td>0%</td>
+        </tr>
+        <tr>
+          <td>Educación Física (EFI)</td>
+          <td>7,52</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+        <tr>
+          <td>Física y Química (FYQ)</td>
+          <td>7,22</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+        <tr>
+          <td>Lengua Castellana (LCL)</td>
+          <td>6,52</td>
+          <td>4</td>
+          <td>17,39%</td>
+        </tr>
+        <tr>
+          <td>Tecnología y Digitalización (TYD)</td>
+          <td>6,43</td>
+          <td>5</td>
+          <td>21,74%</td>
+        </tr>
+        <tr>
+          <td>Inglés (ING)</td>
+          <td>6,39</td>
+          <td>9</td>
+          <td>39,13%</td>
+        </tr>
+        <tr>
+          <td>Matemáticas (MAT)</td>
+          <td>6,00</td>
+          <td>6</td>
+          <td>26,09%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Materias con Alto Índice de Suspensos</h2>
+
+    <h3>Nivel Crítico (>50% de suspensos)</h3>
+    <div class="status-box" style="background: #95a5a6">
+      No se registran materias con más del 50% de suspensos en este grupo.
+    </div>
+
+    <h3>Nivel Preocupante (25-35% de suspensos)</h3>
+    <div class="status-box warning-bg">
+      <ul class="list-style">
+        <li>
+          <strong>Inglés (ING):</strong> 39,13% (9 de 23 alumnos -
+          <i>Supera ligeramente el rango, nivel de alerta</i>)
+        </li>
+        <li><strong>Matemáticas (MAT):</strong> 26,09% (6 de 23 alumnos)</li>
+      </ul>
+    </div>
+
+    <h3>Nivel Moderado (10-20% de suspensos)</h3>
+    <div class="status-box moderate-bg">
+      <ul class="list-style">
+        <li>
+          <strong>Tecnología y Digitalización (TYD):</strong> 21,74% (5 de 23
+          alumnos)
+        </li>
+        <li>
+          <strong>Lengua Castellana (LCL):</strong> 17,39% (4 de 23 alumnos)
+        </li>
+      </ul>
+    </div>
+
+    <h2>Distribución de Suspensos en el Grupo</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nivel de Riesgo</th>
+          <th>N° Materias Suspensas</th>
+          <th>Alumnos</th>
+          <th>Porcentaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="success-bg" style="color: white">
+          <td>Rendimiento Óptimo</td>
+          <td>0 Suspensos</td>
+          <td>13</td>
+          <td>56,52%</td>
+        </tr>
+        <tr>
+          <td>Situación Controlada</td>
+          <td>1 Suspenso</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+        <tr class="moderate-bg">
+          <td>Requiere Seguimiento</td>
+          <td>2 Suspensos</td>
+          <td>4</td>
+          <td>17,39%</td>
+        </tr>
+        <tr class="warning-bg">
+          <td>Atención Urgente</td>
+          <td>3-4 Suspensos</td>
+          <td>4</td>
+          <td>17,39%</td>
+        </tr>
+        <tr class="critical-bg" style="color: white">
+          <td>Crítico</td>
+          <td>5 o más Suspensos</td>
+          <td>1</td>
+          <td>4,35%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Conclusiones del Análisis</h2>
+
+    <div class="conclusion-block">
+      <h3>Diagnóstico General</h3>
+      <p>
+        El grupo 2°A presenta una <strong>media global de 7,42</strong>.
+        Aunque más de la mitad del grupo (56%) tiene un rendimiento óptimo sin
+        suspensos, se observa una mayor dispersión en los resultados comparado
+        con los niveles de 1° de la ESO. Existe un bloque significativo del
+        22% de alumnos (5 personas) que se encuentran en niveles de "Atención
+        Urgente" o "Crítico".
+      </p>
+    </div>
+
+    <div class="conclusion-block">
+      <h3>Principales Problemáticas Identificadas</h3>
+      <ul class="list-style">
+        <li>
+          <strong>Dificultad en Inglés:</strong> Es la asignatura con mayor
+          índice de fracaso, alcanzando casi el 40% de suspensos en el grupo.
+        </li>
+        <li>
+          <strong>Bloque Instrumental (MAT/LCL):</strong> Matemáticas y Lengua
+          concentran un volumen importante de suspensos (10 en total entre
+          ambas), lo que sugiere dificultades en las competencias base.
+        </li>
+        <li>
+          <strong>Tecnología:</strong> Se identifica como una materia con un
+          número de suspensos por encima de lo moderado (21,74%) que afecta a
+          la media general.
+        </li>
+      </ul>
+    </div>
+
+    <div class="conclusion-block">
+      <h3>Factores de Fortaleza de Grupo</h3>
+      <ul class="list-style">
+        <li>
+          <strong>Altas Capacidades en Optativas y Humanidades:</strong>
+          Atención Educativa, Francés y Valores Cívicos presentan medias
+          excelentes (superiores a 8,30) con pleno de aprobados.
+        </li>
+        <li>
+          <strong>Núcleo de Excelencia:</strong> Alumnos como Alumno 10, 12,
+          13 y 17 mantienen medias superiores a 9,00, actuando como referentes
+          positivos para el grupo.
+        </li>
+        <li>
+          <strong>Estabilidad en Ciencias Sociales:</strong> Geografía e
+          Historia muestra una media sólida (7,91) con un índice de suspensos
+          residual.
+        </li>
+      </ul>
+    </div>
+    <div class="conclusion-block">
+      <h3>🎯 Propuestas de Mejora</h3>
+      <ul class="list-style">
+        <li><strong>✅ FyQ:</strong> Se realizará actividades de refuerzo y una prueba escrita para recuperar la materia
+          para el
+          alumno mencionado. Además se realizará un seguimiento del trabajo realizado en clase con notificación a
+          la familia.</li>
+        <li><strong>✅ EFI:</strong> Para alumnos con la materia pendiente: Trabajo individualizado a través de
+          classroom. Mensaje informativo a las familias con las fechas y tareas a realizar para recuperar el 2º
+          trimestre. Entrevista individualizada con cada alumno
+        </li>
+        <li><strong>✅ FRC:</strong> Realizar ejercicios orales para afianzar lo aprendido. Seguir reforzando la
+          expresión escrita a través de ejercicios de mediación y expresión escrita.</li>
+        
+
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

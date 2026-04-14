@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informe Estadístico de Calificaciones - 1°C</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #34495e;
+      --accent: #3498db;
+      --critical: #e74c3c;
+      --warning: #f39c12;
+      --moderate: #f1c40f;
+      --success: #27ae60;
+      --bg: #f4f7f6;
+      --text: #333;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: var(--secondary);
+      border-left: 5px solid var(--accent);
+      padding-left: 15px;
+      margin-top: 30px;
+      background: #f9f9f9;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card span {
+      display: block;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .status-box {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .critical-bg {
+      background-color: var(--critical);
+    }
+
+    .warning-bg {
+      background-color: var(--warning);
+    }
+
+    .moderate-bg {
+      background-color: var(--moderate);
+      color: #333;
+    }
+
+    .success-bg {
+      background-color: var(--success);
+    }
+
+    .conclusion-block {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .list-style {
+      padding-left: 20px;
+    }
+
+    .list-style li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Informe de Calificaciones - 2° Trimestre</h1>
+    <p style="text-align: center; font-weight: bold">
+      Grupo: 1°C | Curso Escolar 25/26
+    </p>
+
+    <div class="summary-grid">
+      <div class="card">
+        N° Alumnos
+        <span>22</span>
+      </div>
+      <div class="card">
+        Media del Grupo
+        <span>7,80</span>
+      </div>
+      <div class="card">
+        0 Suspensos (%)
+        <span>77,27%</span>
+      </div>
+      <div class="card">
+        0-2 Suspensos (%)
+        <span>86,36%</span>
+      </div>
+    </div>
+
+    <h2>Rendimiento por Materias (Orden Descendente de Media)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Materia</th>
+          <th>Media</th>
+          <th>N° Suspensos</th>
+          <th>% Suspensos (Matriculados)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Matemáticas en Acción</td>
+          <td>10,00</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Proyecto de Digitalización</td>
+          <td>9,50</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Cultura Clásica</td>
+          <td>9,00</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Atención Educativa</td>
+          <td>9,00</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Religión</td>
+          <td>8,83</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Francés</td>
+          <td>8,71</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Ed. Plástica y Visual (EPV)</td>
+          <td>8,68</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Biología y Geología (BYG)</td>
+          <td>8,59</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Educación Física (EFI)</td>
+          <td>8,50</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Música (MUS)</td>
+          <td>8,36</td>
+          <td>3</td>
+          <td>13,64%</td>
+        </tr>
+        <tr>
+          <td>Computación y Robótica</td>
+          <td>8,20</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Geografía e Historia (GEH)</td>
+          <td>7,09</td>
+          <td>1</td>
+          <td>4,55%</td>
+        </tr>
+        <tr>
+          <td>Matemáticas (MAT)</td>
+          <td>6,77</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Lengua Castellana (LCL)</td>
+          <td>6,32</td>
+          <td>4</td>
+          <td>18,18%</td>
+        </tr>
+        <tr>
+          <td>Inglés (ING)</td>
+          <td>6,27</td>
+          <td>4</td>
+          <td>18,18%</td>
+        </tr>
+        <tr>
+          <td>Debate y Oratoria</td>
+          <td>6,17</td>
+          <td>1</td>
+          <td>16,67%</td>
+        </tr>
+        <tr>
+          <td>Área Lingüística Transversal</td>
+          <td>6,00</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Materias con Alto Índice de Suspensos</h2>
+
+    <h3>Nivel Crítico (>50% de suspensos)</h3>
+    <div class="status-box" style="background: #95a5a6">
+      No se registran materias en nivel crítico.
+    </div>
+
+    <h3>Nivel Preocupante (25-35% de suspensos)</h3>
+    <div class="status-box" style="background: #95a5a6">
+      No se registran materias en nivel preocupante para este grupo.
+    </div>
+
+    <h3>Nivel Moderado (10-20% de suspensos)</h3>
+    <div class="status-box moderate-bg">
+      <ul class="list-style">
+        <li>
+          <strong>Lengua Castellana (LCL):</strong> 18,18% (4 de 22 alumnos)
+        </li>
+        <li><strong>Inglés (ING):</strong> 18,18% (4 de 22 alumnos)</li>
+        <li><strong>Debate y Oratoria:</strong> 16,67% (1 de 6 alumnos)</li>
+        <li><strong>Música (MUS):</strong> 13,64% (3 de 22 alumnos)</li>
+      </ul>
+    </div>
+
+    <h2>Distribución de Suspensos en el Grupo</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nivel de Riesgo</th>
+          <th>N° Materias Suspensas</th>
+          <th>Alumnos</th>
+          <th>Porcentaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="success-bg" style="color: white">
+          <td>Rendimiento Óptimo</td>
+          <td>0 Suspensos</td>
+          <td>17</td>
+          <td>77,27%</td>
+        </tr>
+        <tr>
+          <td>Situación Controlada</td>
+          <td>1 Suspenso</td>
+          <td>1</td>
+          <td>4,55%</td>
+        </tr>
+        <tr class="moderate-bg">
+          <td>Requiere Seguimiento</td>
+          <td>2 Suspensos</td>
+          <td>1</td>
+          <td>4,55%</td>
+        </tr>
+        <tr class="warning-bg">
+          <td>Atención Urgente</td>
+          <td>3-4 Suspensos</td>
+          <td>3</td>
+          <td>13,64%</td>
+        </tr>
+        <tr class="critical-bg" style="color: white">
+          <td>Crítico</td>
+          <td>5 o más Suspensos</td>
+          <td>0</td>
+          <td>0,00%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Conclusiones del Análisis</h2>
+
+    <div class="conclusion-block">
+      <h3>Diagnóstico General</h3>
+      <p>
+        El grupo 1°C presenta una <strong>media de 7,80</strong>, lo que
+        refleja un desempeño académico sólido y equilibrado. El 77% del
+        alumnado mantiene un expediente sin suspensos, lo cual es un indicador
+        de un clima de trabajo positivo. Al igual que en el grupo B, no se
+        detectan casos en nivel crítico (5+ suspensos).
+      </p>
+    </div>
+
+    <div class="conclusion-block">
+      <h3>Principales Problemáticas Identificadas</h3>
+      <ul class="list-style">
+        <li>
+          <strong>Debilidad en Competencia Lingüística:</strong> LCL e Inglés
+          concentran el mayor número de alumnos con dificultades (4 alumnos en
+          cada una), con las medias más bajas del currículo común.
+        </li>
+        <li>
+          <strong>Música:</strong> Presenta un número significativo de
+          suspensos (3) a pesar de tener una media alta (8,36), lo que indica
+          una polarización en los resultados de esta materia.
+        </li>
+        <li>
+          <strong>Foco de Intervención:</strong> Los 3 alumnos con 3-4
+          suspensos requieren un seguimiento tutorial inmediato para evitar el
+          desenganche.
+        </li>
+      </ul>
+    </div>
+
+    <div class="conclusion-block">
+      <h3>Factores de Fortaleza de Grupo</h3>
+      <ul class="list-style">
+        <li>
+          <strong>Éxito en Matemáticas:</strong> Al igual que en el grupo 1°B,
+          Matemáticas en Acción registra 0 suspensos en este trimestre, con un
+          aprendizaje aparentemente bien consolidado.
+        </li>
+        <li>
+          <strong>Materias de Libre Configuración/Proyectos:</strong> Áreas
+          como Matemáticas en Acción (Media 10,00) y Digitalización muestran
+          un compromiso total del alumnado matriculado.
+        </li>
+        <li>
+          <strong>Excelente desempeño en Ciencias:</strong> BYG presenta una
+          media muy alta (8,59) sin ningún suspenso registrado.
+        </li>
+      </ul>
+    </div>
+    <div class="conclusion-block">
+      <h3>🎯 Propuestas de Mejora</h3>
+      <ul class="list-style">
+        <li><strong>✅ ByG:</strong> Comunicación con la familia y fraccionamiento del trabajo.</li>
+        <li><strong>✅ EFI:</strong> -Entrevista individualizada con la alumna. Trabajo individualizado a través de
+          moodle. Información a las familias a través de ipasen.
+        </li>
+        <li><strong>✅ FRC:</strong> Realizar pruebas orales para mejorar la parte oral y afianzar los saberes
+          trabajados. Realizar más ejercicios de expresión escrita para reforzar lo aprendido</li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

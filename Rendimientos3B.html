@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Estadístico de Calificaciones - 3°B</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --critical: #e74c3c;
+            --warning: #f39c12;
+            --moderate: #f1c40f;
+            --success: #27ae60;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 30px;
+            background: #f9f9f9;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .card span {
+            display: block;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .status-box {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .critical-bg {
+            background-color: var(--critical);
+        }
+
+        .warning-bg {
+            background-color: var(--warning);
+        }
+
+        .moderate-bg {
+            background-color: var(--moderate);
+            color: #333;
+        }
+
+        .success-bg {
+            background-color: var(--success);
+        }
+
+        .conclusion-block {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .list-style {
+            padding-left: 20px;
+        }
+
+        .list-style li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Informe de Calificaciones - 2° Trimestre</h1>
+        <p style="text-align: center; font-weight: bold;">Grupo: 3°B</p>
+
+        <div class="summary-grid">
+            <div class="card">
+                N° Alumnos
+                <span>27</span>
+            </div>
+            <div class="card">
+                Media del Grupo
+                <span>7,01</span>
+            </div>
+            <div class="card">
+                0 Suspensos (%)
+                <span>59,26%</span>
+            </div>
+            <div class="card">
+                0-2 Suspensos (%)
+                <span>77,78%</span>
+            </div>
+        </div>
+
+        <h2>Rendimiento por Materias (Orden Descendente de Media)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Media</th>
+                    <th>N° Suspensos</th>
+                    <th>% Suspensos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Atención Educativa (ATEDU)</td>
+                    <td>9,75</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Cultura Clásica (CCL)</td>
+                    <td>9,00</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Religión (REL)</td>
+                    <td>8,65</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Francés (FRA2)</td>
+                    <td>8,33</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Educación Física (EFI)</td>
+                    <td>7,85</td>
+                    <td>1</td>
+                    <td>3,70%</td>
+                </tr>
+                <tr>
+                    <td>Ed. Plástica y Visual (EPV)</td>
+                    <td>7,56</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Inglés (ING)</td>
+                    <td>7,09</td>
+                    <td>2</td>
+                    <td>8,70%</td>
+                </tr>
+                <tr>
+                    <td>Matemáticas (MAT)</td>
+                    <td>7,00</td>
+                    <td>3</td>
+                    <td>13,04%</td>
+                </tr>
+                <tr>
+                    <td>Biología y Geología (BYG)</td>
+                    <td>6,91</td>
+                    <td>3</td>
+                    <td>13,04%</td>
+                </tr>
+                <tr>
+                    <td>Tecnología y Dig. (TYD)</td>
+                    <td>6,19</td>
+                    <td>7</td>
+                    <td>25,93%</td>
+                </tr>
+                <tr>
+                    <td>Física y Química (FYQ)</td>
+                    <td>6,17</td>
+                    <td>5</td>
+                    <td>21,74%</td>
+                </tr>
+                <tr>
+                    <td>Geografía e Historia (GEH)</td>
+                    <td>6,04</td>
+                    <td>1</td>
+                    <td>4,35%</td>
+                </tr>
+                <tr>
+                    <td>Lengua Castellana (LCL)</td>
+                    <td>5,87</td>
+                    <td>6</td>
+                    <td>26,09%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Análisis de Ámbitos (Diversificación)</h2>
+        <div class="conclusion-block">
+            <p>En el grupo 3°B, los ámbitos muestran resultados sólidos y por encima de la media de las instrumentales
+                ordinarias:</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ámbito</th>
+                    <th>Media</th>
+                    <th>N° Suspensos</th>
+                    <th>Porcentaje de Éxito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ámbito Científico-Tecnológico (ACT)</strong></td>
+                    <td>6,50</td>
+                    <td>1</td>
+                    <td>75,00%</td>
+                </tr>
+                <tr>
+                    <td><strong>Ámbito Socio-Lingüístico (ASL)</strong></td>
+                    <td>6,50</td>
+                    <td>0</td>
+                    <td>100,00%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Materias con Índice de Suspensos Significativo</h2>
+
+        <h3>Nivel Preocupante (20-30% de suspensos)</h3>
+        <div class="status-box warning-bg">
+            <ul class="list-style">
+                <li><strong>Lengua Castellana (LCL):</strong> 26,09% (6 de 23 alumnos).</li>
+                <li><strong>Tecnología y Dig. (TYD):</strong> 25,93% (7 de 27 alumnos).</li>
+                <li><strong>Física y Química (FYQ):</strong> 21,74% (5 de 23 alumnos).</li>
+            </ul>
+        </div>
+
+        <h2>Distribución de Suspensos en el Grupo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nivel de Riesgo</th>
+                    <th>N° Materias Suspensas</th>
+                    <th>Alumnos</th>
+                    <th>Porcentaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="success-bg" style="color:white">
+                    <td>Rendimiento Óptimo</td>
+                    <td>0 Suspensos</td>
+                    <td>16</td>
+                    <td>59,26%</td>
+                </tr>
+                <tr>
+                    <td>Situación Controlada</td>
+                    <td>1 Suspenso</td>
+                    <td>4</td>
+                    <td>14,81%</td>
+                </tr>
+                <tr class="moderate-bg">
+                    <td>Requiere Seguimiento</td>
+                    <td>2 Suspensos</td>
+                    <td>1</td>
+                    <td>3,70%</td>
+                </tr>
+                <tr class="warning-bg">
+                    <td>Atención Urgente</td>
+                    <td>3 o 4 Suspensos</td>
+                    <td>4</td>
+                    <td>14,81%</td>
+                </tr>
+                <tr class="critical-bg" style="color:white">
+                    <td>Crítico</td>
+                    <td>5 o más Suspensos</td>
+                    <td>2</td>
+                    <td>7,41%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Conclusiones del Análisis</h2>
+
+        <div class="conclusion-block">
+            <h3>Diagnóstico General</h3>
+            <p>El grupo 3°B presenta una <strong>media de 7,01</strong>. El 59% del alumnado ha aprobado todas las
+                materias, pero preocupa el 22% de alumnos (6 personas) que se encuentran en situación de "Atención
+                Urgente" o "Crítica", especialmente dos alumnos, que acumulan 6 materias suspensas cada
+                uno.</p>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Subbloque: Desempeño en Ámbitos (ACT y ASL)</h3>
+            <p>Los resultados de los ámbitos son consistentes y ofrecen una alternativa viable al currículo ordinario:
+            </p>
+            <ul class="list-style">
+                <li><strong>Estabilidad en ASL:</strong> El Ámbito Socio-Lingüístico ha logrado un 100% de aprobados con
+                    una media de 6,50.</li>
+                <li><strong>Desafío en ACT:</strong> Aunque la media es idéntica (6,50), se registra un suspenso en el
+                    Ámbito Científico-Tecnológico.</li>
+            </ul>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Áreas de Riesgo Académico</h3>
+            <ul class="list-style">
+                <li><strong>Lengua y Tecnología:</strong> Son las materias con mayor número de suspensos (6 y 7
+                    respectivamente) y presentan las mayores dificultades de aprendizaje para el grupo.</li>
+                <li><strong>Física y Química:</strong> Registra un 21,7% de suspensos, siendo junto a Tecnología el
+                    principal escollo en el área científica.</li>
+            </ul>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Fortalezas Identificadas</h3>
+            <ul class="list-style">
+                <li><strong>Cultura Clásica y Francés:</strong> Presentan resultados excelentes con medias de 9,00 y
+                    8,33 respectivamente.</li>
+                <li><strong>Convivencia:</strong> Las áreas de ATEDU y REL mantienen medias muy altas.</li>
+            </ul>
+        </div>
+        <div class="conclusion-block">
+            <h3>🎯 Propuestas de Mejora</h3>
+            <ul class="list-style">
+                <li><strong>✅ ByG:</strong> Se realizará una entrevista con los alumnos que no han superado la materia
+                    para analizar las
+                    causas y proponer soluciones.</li>
+                <li><strong>✅ FyQ:</strong>Se realizarán actividades de repaso haciendo hincapié en los procedimientos
+                    de resolución
+                    de problemas y en el razonamiento matemático. Se continuarán reforzando los contenidos esenciales
+                    del
+                    nivel. Además, seguiremos con medidas metodológicas de apoyo, tales como simplificación y aclaración
+                    de enunciados sobre todo en las pruebas escritas. Se tratará de facilitar adaptaciones no
+                    significativas,
+                    como mayor tiempo en pruebas escritas, reducción del número de ejercicios o la extensión de éstos.
+                    Se
+                    seguirá combinando el trabajo individual con actividades en parejas o pequeños grupos y mantendremos
+                    una coordinación con la familia para favorecer hábitos de estudio y seguimiento del trabajo diario.
+                    Revisión de los Programas de Refuerzo de Aprendizaje. Por último, se pretende mejorar la atención
+                    del
+                    alumnado e insistir en la necesidad de adquirir hábitos de trabajo y estudio diarios para obtener
+                    mejores
+                    resultados académicos.</li>
+                <li><strong>✅ ACT:</strong> Continuaremos aplicando un plan de trabajo individualizado, ajustado al
+                    ritmo y
+                    capacidades del alumno/a, centrado en la adquisición de los aprendizajes básicos y funcionales del
+                    ámbito, insistiendo en la importancia del esfuerzo diario, la constancia y la asistencia a clase.
+                    (Valorando
+                    especialmente el trabajo realizado en el aula).Seguiremos llevando a cabo tareas graduadas y
+                    secuenciadas, con instrucciones claras que faciliten la comprensión. Se intentará mantener una
+                    comunicación/tutoría periódica con la familia. Insistir en la necesidad de adquirir hábitos de
+                    trabajo y
+                    estudio diarios.</li>
+                <li><strong>✅ EFI:</strong> Para alumnos con la materia pendiente: Trabajo individualizado a través de
+                    classroom. Mensaje informativo a las familias con las fechas y tareas a realizar para recuperar el
+                    2º
+                    trimestre. Entrevista individualizada con cada alumno
+                </li>
+                <li><strong>✅ FRC:</strong> Reforzar los contenidos con pruebas orales, y adaptar los contenidos para el
+                    alumnado que cursa el idioma por primera vez.</li>
+                <li><strong>✅ ING:</strong> Material de refuerzo adaptado a cada nivel. Pruebas adaptadas. Atención
+                    individualizada.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

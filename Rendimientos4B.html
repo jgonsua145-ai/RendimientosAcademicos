@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Estadístico de Calificaciones - 4°B</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --critical: #e74c3c;
+            --warning: #f39c12;
+            --moderate: #f1c40f;
+            --success: #27ae60;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-top: 30px;
+            background: #f9f9f9;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .card span {
+            display: block;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .status-box {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .critical-bg {
+            background-color: var(--critical);
+        }
+
+        .warning-bg {
+            background-color: var(--warning);
+        }
+
+        .moderate-bg {
+            background-color: var(--moderate);
+            color: #333;
+        }
+
+        .success-bg {
+            background-color: var(--success);
+        }
+
+        .conclusion-block {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .list-style {
+            padding-left: 20px;
+        }
+
+        .list-style li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Informe de Calificaciones - 2° Trimestre</h1>
+        <p style="text-align: center; font-weight: bold;">Grupo: 4°B</p>
+
+        <div class="summary-grid">
+            <div class="card">
+                N° Alumnos
+                <span>28</span>
+            </div>
+            <div class="card">
+                Media del Grupo
+                <span>7,07</span>
+            </div>
+            <div class="card">
+                0 Suspensos (%)
+                <span>60,71%</span>
+            </div>
+            <div class="card">
+                0-2 Suspensos (%)
+                <span>92,86%</span>
+            </div>
+        </div>
+
+        <h2>Rendimiento por Materias (Instrumentales y Comunes)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Media</th>
+                    <th>N° Suspensos</th>
+                    <th>% Suspensos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Atención Educativa (ATEDU)</td>
+                    <td>10,00</td>
+                    <td>1</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Religión (REL)</td>
+                    <td>8,57</td>
+                    <td>0</td>
+                    <td>4,35%</td>
+                </tr>
+                <tr>
+                    <td>Inglés (ING)</td>
+                    <td>6,52</td>
+                    <td>2</td>
+                    <td>8,00%</td>
+                </tr>
+                <tr>
+                    <td>Educación Física (EFI)</td>
+                    <td>6,46</td>
+                    <td>2</td>
+                    <td>7,14%</td>
+                </tr>
+                <tr>
+                    <td>Geografía e Historia (GEH)</td>
+                    <td>6,08</td>
+                    <td>3</td>
+                    <td>12,00%</td>
+                </tr>
+                <tr>
+                    <td>Matemáticas B (MAB)</td>
+                    <td>7,40</td>
+                    <td>0</td>
+                    <td>0,00%</td>
+                </tr>
+                <tr>
+                    <td>Matemáticas A (MAA)</td>
+                    <td>5,50</td>
+                    <td>2</td>
+                    <td>20,00%</td>
+                </tr>
+                <tr>
+                    <td>Lengua Castellana (LCL)</td>
+                    <td>5,28</td>
+                    <td>7</td>
+                    <td>28,00%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Análisis de Ámbitos (Diversificación)</h2>
+        <div class="conclusion-block">
+            <p>El alumnado del programa de diversificación en 4°B muestra un rendimiento sobresaliente, sin presencia de
+                suspensos en los bloques específicos:</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ámbito</th>
+                    <th>Media</th>
+                    <th>N° Suspensos</th>
+                    <th>Porcentaje de Éxito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ámbito Científico-Tecnológico (ACT)</strong></td>
+                    <td>7,67</td>
+                    <td>0</td>
+                    <td>100,00%</td>
+                </tr>
+                <tr>
+                    <td><strong>Ámbito Lingüístico y Social (ALS)</strong></td>
+                    <td>7,33</td>
+                    <td>0</td>
+                    <td>100,00%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Materias con Índice de Suspensos Significativo</h2>
+
+        <h3>Nivel Preocupante (20-30% de suspensos)</h3>
+        <div class="status-box warning-bg">
+            <ul class="list-style">
+                <li><strong>Lengua Castellana (LCL):</strong> 28,00% de suspensos (7 de 25 alumnos).</li>
+                <li><strong>Matemáticas A (MAA):</strong> 20,00% de suspensos (2 de 10 alumnos).</li>
+            </ul>
+        </div>
+
+        <h3>Nivel Crítico (Fallas de Rendimiento)</h3>
+        <div class="status-box critical-bg">
+            <ul class="list-style">
+                <li><strong>Física y Química (FYQ):</strong> Presenta una media de 4,20, la más baja del grupo, con 4
+                    alumnos suspensos de 5 matriculados (80% de fracaso).</li>
+            </ul>
+        </div>
+
+        <h2>Distribución de Suspensos en el Grupo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>N° Suspensos</th>
+                    <th>N° Alumnos</th>
+                    <th>Porcentaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="success-bg" style="color:white">
+                    <td>Rendimiento Óptimo</td>
+                    <td>0</td>
+                    <td>17</td>
+                    <td>60,71%</td>
+                </tr>
+                <tr>
+                    <td>Riesgo Bajo</td>
+                    <td>1</td>
+                    <td>8</td>
+                    <td>28,57%</td>
+                </tr>
+                <tr class="moderate-bg">
+                    <td>Seguimiento</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3,57%</td>
+                </tr>
+                <tr class="critical-bg" style="color:rgb(0, 0, 0)">
+                    <td>Riesgo Crítico</td>
+                    <td>5 o más</td>
+                    <td>2</td>
+                    <td>7,14%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Conclusiones del Análisis</h2>
+
+        <div class="conclusion-block">
+            <h3>Diagnóstico del Grupo</h3>
+            <p>El grupo 4°B presenta una <strong>media general de 7,07</strong>. Existe una base sólida con más del 60%
+                de aprobados totales, pero se detectan dos perfiles de riesgo extremo (dos alumnos) con 8 y 10
+                materias suspensas respectivamente, lo que requiere atención inmediata.</p>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Análisis de los Ámbitos (Diversificación)</h3>
+            <p>Los resultados en diversificación son la principal fortaleza académica del grupo:</p>
+            <ul class="list-style">
+                <li><strong>Excelencia en ALS:</strong> El Ámbito Lingüístico y Social alcanza una media de 7,33.</li>
+                <li><strong>Consolidación en ACT:</strong> El Ámbito Científico-Tecnológico mantiene un pleno de
+                    aprobados con una media de 7,67.</li>
+            </ul>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Materias con Dificultad Académica</h3>
+            <ul class="list-style">
+                <li><strong>Lengua Castellana (LCL):</strong> Es la materia con mayor número de suspensos (7 alumnos),
+                    indicando un problema de base en la competencia lingüística ordinaria.</li>
+                <li><strong>Física y Química:</strong> Aunque con pocos alumnos, el fracaso es casi total (80%), siendo
+                    el área con mayor dificultad de superación.</li>
+            </ul>
+        </div>
+
+        <div class="conclusion-block">
+            <h3>Fortalezas Identificadas</h3>
+            <ul class="list-style">
+                <li><strong>Matemáticas B:</strong> Registra un 100% de éxito con una media notable de 7,40.</li>
+                <li><strong>Digitalización (DIG) y Expresión Artística (EAR):</strong> Ambas presentan medias superiores
+                    a 8,00, destacando como áreas de alto rendimiento para el alumnado que las cursa.</li>
+            </ul>
+        </div>
+        <div class="conclusion-block">
+            <h3>🎯 Propuestas de Mejora</h3>
+            <ul class="list-style">
+                <li><strong>✅ ByG:</strong> Los resultados son muy satisfactorios de modo que por el momento, no se
+                    considera aplicar propuestas de mejora.</li>
+                <li><strong>✅ FyQ:</strong>Se realizarán actividades de refuerzo y se realizará un seguimiento del
+                    trabajo realizado en clase con notificación a la familia. Mejorar la atención del alumnado e
+                    insistir en la necesidad de
+                    adquirir hábitos de trabajo y estudio diarios para obtener mejores resultados académicos.</li>
+                <li><strong>✅ ACT:</strong> Los resultados son muy satisfactorios de modo que la propuesta de mejora es
+                    seguir trabajando en la misma línea.</li>
+                <li><strong>✅ EFI:</strong> Para alumnos con la materia pendiente: Trabajo individualizado a través de
+                    classroom. Mensaje informativo a las familias con las fechas y tareas a realizar para recuperar el
+                    2º
+                    trimestre. Entrevista individualizada con cada alumno
+                </li>
+                <li><strong>✅ FRC:</strong> Reforzar la expresión escrita a través de ejercicios de redacción.</li>
+                <li><strong>✅ ING:</strong> Material de refuerzo adaptado a cada nivel. Pruebas adaptadas. Atención
+                    individualizada.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
