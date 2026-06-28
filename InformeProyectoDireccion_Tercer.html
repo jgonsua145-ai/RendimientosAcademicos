@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis del Proyecto de Dirección - Tercer Año</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+.container {
+    max-width: 1480px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+header h1 { font-size: 2.2em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+header p { font-size: 1.1em; opacity: 0.9; }
+.content { padding: 40px; }
+.section { margin-bottom: 50px; }
+.section h2 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #667eea;
+}
+.section h3.sub { color:#764ba2; font-size:1.25em; margin: 25px 0 12px; }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+.stat-card {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.stat-card.green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+.stat-card.orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.stat-card.blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.stat-card h3 { font-size: 0.9em; margin-bottom: 8px; opacity: 0.95; }
+.stat-card .value { font-size: 1.9em; font-weight: bold; }
+
+.obj-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-left: 6px solid #667eea;
+}
+.obj-card.logrado { border-left-color: #28a745; }
+.obj-card.parcial { border-left-color: #ffc107; }
+.obj-card.critico { border-left-color: #dc3545; }
+.obj-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;}
+.obj-header h3 { color:#333; font-size:1.25em; }
+.status-badge { padding:5px 14px; border-radius:14px; font-size:0.82em; font-weight:bold; color:white; white-space:nowrap; }
+.status-logrado { background:#28a745; }
+.status-parcial { background:#f59e0b; }
+.status-critico { background:#dc3545; }
+.status-desigual { background:#6f42c1; }
+.obj-meta { font-size:0.9em; color:#555; margin-bottom:10px; font-style:italic; }
+.obj-data { margin: 10px 0; line-height:1.7; }
+.obj-data strong { color:#444; }
+
+table { width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05); margin-top:10px; }
+th { background:#667eea; color:white; padding:10px 14px; text-align:center; font-weight:600; font-size:0.9em; }
+th.left { text-align:left; }
+td { padding:9px 14px; border-bottom:1px solid #e9ecef; text-align:center; font-size:0.92em; }
+td.left { text-align:left; font-weight:600; }
+tr:hover { background:#f8f9fa; }
+.fail { color:#dc3545; font-weight:bold; }
+.pass { color:#28a745; font-weight:bold; }
+.mid { color:#f59e0b; font-weight:bold; }
+
+.alert { background:#fff3cd; border-left:5px solid #ffc107; padding:20px; margin:20px 0; border-radius:10px; }
+.alert.danger { background:#f8d7da; border-left-color:#dc3545; }
+.alert.info { background:#d1ecf1; border-left-color:#17a2b8; }
+.alert h3 { color:#856404; margin-bottom:10px; }
+.alert.danger h3 { color:#721c24; }
+.alert.info h3 { color:#0c5460; }
+
+.conclusion { background:#e7f3ff; border-left:5px solid #2196F3; padding:25px; margin:20px 0; border-radius:10px; line-height:1.8; }
+.conclusion h3 { color:#1565c0; margin-bottom:15px; }
+.conclusion.green { background:#d4edda; border-left-color:#28a745; }
+.conclusion.green h3 { color:#155724; }
+
+.proposals { background:#d4edda; border-left:5px solid #28a745; padding:25px; margin:20px 0; border-radius:10px; }
+.proposals h3 { color:#155724; margin-bottom:15px; font-size:1.2em; }
+.proposals ul { margin-left:20px; }
+.proposals li { margin:10px 0; line-height:1.6; color:#155724; }
+
+.dafo-grid { display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin:20px 0; }
+.dafo-box { padding:20px; border-radius:12px; }
+.dafo-f { background:#d4edda; border-left:5px solid #28a745; }
+.dafo-d { background:#f8d7da; border-left:5px solid #dc3545; }
+.dafo-o { background:#d1ecf1; border-left:5px solid #17a2b8; }
+.dafo-a { background:#fff3cd; border-left:5px solid #ffc107; }
+.dafo-box h4 { margin-bottom:10px; }
+.dafo-box ul { margin-left:18px; font-size:0.92em; line-height:1.6; }
+@media (max-width: 800px) { .dafo-grid { grid-template-columns: 1fr; } }
+.note-mini { font-size: 0.85em; color:#666; margin-top:4px; font-style: italic; }
+@media print { body{background:white;} .container{box-shadow:none;} }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>📊 ANÁLISIS EXHAUSTIVO DEL PROYECTO DE DIRECCIÓN</h1>
+        <p>Seguimiento y Evaluación — Tercer Año (Curso 2025-2026)</p>
+    </header>
+
+    <div class="content">
+
+        <!-- RESUMEN EJECUTIVO -->
+        <div class="section">
+            <h2>📋 Resumen Ejecutivo</h2>
+            <p style="line-height:1.8; margin-bottom:20px;">El Proyecto de Dirección articula 12 objetivos específicos en 5 ámbitos (Rendimiento Escolar, Enseñanza-Aprendizaje, Organización, Liderazgo Pedagógico y Participación). Al cierre del tercer año, los resultados muestran un centro con <strong>fortalezas sólidas y consolidadas</strong> en gestión documental, competencia digital general y programas de recuperación/diversificación, pero con <strong>tres brechas estructurales recurrentes</strong> que atraviesan varios objetivos a la vez: la desconexión de las familias, la crisis sistémica de 3º de ESO, y la distancia entre la "intención" del profesorado/alumnado y su "aplicación práctica real".</p>
+
+            <div class="stats-grid">
+                <div class="stat-card green">
+                    <h3>Objetivos Logrados o Muy Avanzados</h3>
+                    <div class="value">4 de 12</div>
+                    <div class="note-mini" style="color:white;">B1, D3, y parcialmente A2 y C1</div>
+                </div>
+                <div class="stat-card orange">
+                    <h3>Objetivos con Logro Parcial</h3>
+                    <div class="value">6 de 12</div>
+                    <div class="note-mini" style="color:white;">A1, B2, B3, C2, D2, y D1 (con crisis localizada)</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Hallazgo Transversal Más Relevante</h3>
+                    <div class="value">3º ESO</div>
+                    <div class="note-mini" style="color:white;">Detectado de forma independiente en 2 objetivos distintos (A2 y D1)</div>
+                </div>
+                <div class="stat-card blue">
+                    <h3>Objetivos Pendientes de Datos</h3>
+                    <div class="value">E1, E2</div>
+                    <div class="note-mini" style="color:white;">Sin resultados cuantitativos de encuesta en este informe</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁMBITO A: RENDIMIENTO ESCOLAR -->
+        <div class="section">
+            <h2>🎓 Ámbito A: Rendimientos Escolares</h2>
+
+            <div class="obj-card parcial">
+                <div class="obj-header">
+                    <h3>A1 — Continuidad en estudios posteriores</h3>
+                    <span class="status-badge status-parcial">LOGRO PARCIAL</span>
+                </div>
+                <div class="obj-meta">Meta: aumentar del 95.46% al 100% el alumnado que continúa estudios.</div>
+                <div class="obj-data">
+                    <p><strong>Lo conseguido:</strong> el 90.7% del alumnado de 4º ESO (N=32) declara intención de continuar estudiando (56.3% Bachillerato, 34.4% Ciclos Formativos), con apoyo familiar muy alto (4.56/5) y motivación general aceptable (3.88/5).</p>
+                    <p><strong>El problema no resuelto — la "brecha de la FP":</strong> existe una diferencia muy marcada entre el alumnado que opta por Bachillerato y el que opta por Ciclos Formativos en absolutamente todos los indicadores: motivación (4.50 vs 2.73), información recibida (4.56 vs 3.73), consulta de dudas con el orientador (4.33 vs 3.18). El alumnado de FP se siente sistemáticamente peor atendido.</p>
+                    <p><strong>El indicador más bajo de todo el objetivo:</strong> el tratamiento de temas de futuro en las tutorías grupales obtiene solo 2.84/5, el peor dato del informe A1. Esto indica que la orientación se percibe como algo externo (charlas puntuales) y no como parte del día a día del aula.</p>
+                </div>
+            </div>
+
+            <div class="obj-card desigual" style="border-left-color:#6f42c1;">
+                <div class="obj-header">
+                    <h3>A2 — Metodologías innovadoras (ABP, flip-classroom)</h3>
+                    <span class="status-badge status-desigual">LOGRO MUY DESIGUAL POR NIVEL</span>
+                </div>
+                <div class="obj-meta">Meta: implementar en el currículo en un 5%.</div>
+                <div class="obj-data">
+                    <p><strong>Meta cuantitativa superada con creces:</strong> el 45.9% del alumnado ha trabajado por proyectos o clase invertida en 3 o más asignaturas, y solo un residual 4.1% no lo ha experimentado en ninguna. El respaldo del alumnado es masivo: el 79.6% afirma aprender mejor con metodologías activas.</p>
+                    <p><strong>La "paradoja de 4º ESO":</strong> es el curso donde MENOS proyectos reales se implementan (3.18, el más bajo del centro), pero cuando se hacen, obtiene los mejores resultados de todo el centro: motivación 4.29, comprensión 4.41, claridad 4.53. Hay una oportunidad clara de crecimiento sin explotar.</p>
+                    <p><strong>El "bache de 3º ESO" (primera detección):</strong> este curso registra sistemáticamente las peores puntuaciones: dinamismo (2.89), clase invertida (2.78, la nota más baja del centro en cualquier indicador de A2), ayuda percibida (3.22). Paradójicamente, su deseo de seguir trabajando por proyectos es el más alto de la ESO (4.11): quieren el cambio, pero el diseño actual de las tareas no les funciona.</p>
+                    <p><strong>Flipped Classroom como punto débil transversal:</strong> con una media de centro de solo 3.20, es la metodología activa menos consolidada en todos los niveles.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁMBITO B: ENSEÑANZA-APRENDIZAJE -->
+        <div class="section">
+            <h2>💻 Ámbito B: Enseñanza-Aprendizaje</h2>
+
+            <div class="obj-card logrado">
+                <div class="obj-header">
+                    <h3>B1 — Uso de herramientas educativas digitales</h3>
+                    <span class="status-badge status-logrado">OBJETIVO LOGRADO</span>
+                </div>
+                <div class="obj-meta">Meta: 80% del profesorado, 80% del alumnado (según versión posterior, 50%/80%).</div>
+                <div class="obj-data">
+                    <p><strong>Resultado sobresaliente:</strong> el 81% del profesorado (17 de 21) se sitúa en nivel de competencia digital intermedio-avanzado (B1-B2). Todos los bloques de la encuesta superan 4.00/5, con homogeneidad notable: acompañamiento institucional (4.38), conocimiento de herramientas (4.38), integración competencial con la evaluación (4.33).</p>
+                    <p><strong>Único punto débil:</strong> la "seguridad percibida" al usar herramientas básicas (4.00) es la puntuación más baja del bloque, indicando que un sector minoritario (probablemente los niveles A1-A2) aún experimenta cierta ansiedad tecnológica.</p>
+                </div>
+            </div>
+
+            <div class="obj-card parcial">
+                <div class="obj-header">
+                    <h3>B2 — Banco de buenas prácticas docentes</h3>
+                    <span class="status-badge status-parcial">LOGRO PARCIAL — BRECHA INTENCIÓN/ACCIÓN</span>
+                </div>
+                <div class="obj-meta">Meta: ≥10 experiencias el primer año, ≥30% de participación del claustro.</div>
+                <div class="obj-data">
+                    <p><strong>Potencial alto:</strong> el 57.9% del profesorado (11 docentes) ya realiza actividades innovadoras y un 21% adicional está en proceso, lo que da un 78.9% de la muestra con capacidad directa de nutrir el banco.</p>
+                    <p><strong>La brecha más llamativa de todo el documento:</strong> el profesorado valora altísimo que compartir buenas prácticas mejora el trabajo docente (4.32), pero la participación real declarada es de solo 2.05/5 — la nota más baja de todo el Objetivo B2. Existe una barrera (probablemente burocrática o de falta de tiempo) que impide que la intención se traduzca en aportación efectiva al banco.</p>
+                </div>
+            </div>
+
+            <div class="obj-card desigual" style="border-left-color:#6f42c1;">
+                <div class="obj-header">
+                    <h3>B3 — Cuaderno de Séneca + sincronización con Moodle</h3>
+                    <span class="status-badge status-desigual">ÉXITO ROTUNDO EN SÉNECA / FRACASO EN MOODLE</span>
+                </div>
+                <div class="obj-meta">Meta: ≥80% del claustro usa el cuaderno; ≥50% de materias con Moodle sincronizado.</div>
+                <div class="obj-data">
+                    <p><strong>Cuaderno de Séneca — éxito consolidado:</strong> todos los indicadores superan 4.30: acompañamiento (4.55), formación (4.45), usabilidad (4.35), coherencia evaluativa (4.35). Es la herramienta mejor valorada de todo el documento.</p>
+                    <p><strong>Sincronización con Moodle — fracaso técnico (N=20):</strong> solo el 35% (7 docentes) sincroniza con éxito; otro 35% desconocía la posibilidad; un 30% lo intentó sin éxito. Las puntuaciones del bloque 3 caen a mínimos históricos: conocimiento del procedimiento (2.40), uso de Moodle (2.30), éxito en la importación (2.15) — son, sin excepción, las tres notas más bajas de todo el informe del Proyecto de Dirección.</p>
+                </div>
+            </div>
+
+            <div class="obj-card parcial" style="border-left-color:#28a745;">
+                <div class="obj-header">
+                    <h3>C1 — Documentos del Plan de Centro accesibles</h3>
+                    <span class="status-badge status-parcial">LOGRO ALTO CON UNA BRECHA DE USO</span>
+                </div>
+                <div class="obj-meta">Meta: ≥90% conoce los documentos clave.</div>
+                <div class="obj-data">
+                    <p><strong>Fortaleza digital consolidada:</strong> el 76.2% del profesorado consulta activamente el Plan de Centro; el conocimiento de su existencia (4.52) y la facilidad de acceso digital (4.38) son de las puntuaciones más altas del informe completo.</p>
+                    <p><strong>El reto operativo:</strong> el "uso práctico para resolver dudas concretas" cae a 3.57, el indicador más bajo del objetivo. El profesorado sabe que los documentos existen y son buenos, pero no los usa como manual de consulta rápida del día a día.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁMBITO C: ORGANIZACIÓN Y CONVIVENCIA -->
+        <div class="section">
+            <h2>🤝 Ámbito C: Organización y Convivencia</h2>
+
+            <div class="obj-card critico">
+                <div class="obj-header">
+                    <h3>C2 — Plan de Convivencia y reducción de sanciones</h3>
+                    <span class="status-badge status-critico">EL OBJETIVO MÁS CRÍTICO DEL PROYECTO</span>
+                </div>
+                <div class="obj-meta">Meta: disminuir un 5% el número de sanciones.</div>
+                <div class="obj-data">
+                    <p><strong>El dato más bajo de todo el documento:</strong> mientras el profesorado se siente muy implicado en la mejora de la convivencia (4.22), las familias se autoevalúan con un 2.83 — la puntuación más crítica de toda la encuesta C2. Hay una desconexión clara entre el centro y los hogares en este ámbito.</p>
+                    <p><strong>Percepción de inconsistencia:</strong> los tres sectores (profesorado 3.26, alumnado 3.30, familias 3.33) coinciden en una nota moderada-baja sobre si se aplican los mismos criterios ante un mismo conflicto en todas las aulas — el centro necesita trabajar más la unidad de actuación del claustro.</p>
+                    <p><strong>Fortaleza a aprovechar:</strong> los tres sectores están de acuerdo (medias &gt;3.7) en que la convivencia es responsabilidad compartida — una base sólida sobre la que construir nuevas acciones.</p>
+                </div>
+                <table style="margin-top:15px;">
+                    <tr><th class="left">Indicador</th><th>Profesorado</th><th>Alumnado</th><th>Familias</th></tr>
+                    <tr><td class="left">Conocimiento de las normas</td><td class="pass">4.43</td><td>3.76</td><td class="mid">3.50</td></tr>
+                    <tr><td class="left">Implicación personal en la mejora</td><td class="pass">4.22</td><td>3.54</td><td class="fail">2.83</td></tr>
+                    <tr><td class="left">Disminución de conflictos percibida</td><td class="mid">3.17</td><td class="mid">3.09</td><td>3.67</td></tr>
+                    <tr><td class="left">Unidad de criterios entre aulas</td><td class="mid">3.26</td><td class="mid">3.30</td><td class="mid">3.33</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ÁMBITO D: LIDERAZGO PEDAGÓGICO -->
+        <div class="section">
+            <h2>📐 Ámbito D: Liderazgo Pedagógico</h2>
+
+            <div class="obj-card critico">
+                <div class="obj-header">
+                    <h3>D1 — Criterios comunes para trabajos y presentaciones</h3>
+                    <span class="status-badge status-critico">CRISIS LOCALIZADA EN 3º ESO (CONFIRMA A2)</span>
+                </div>
+                <div class="obj-meta">Meta: ≥90% de departamentos aplican el documento común; mejora ≥20% en calidad de trabajos.</div>
+                <div class="obj-data">
+                    <p><strong>Dificultad transversal nº1 del alumnado:</strong> el 61.5% identifica "hablar en público" como su mayor dificultad — con diferencia, la barrera comunicativa más extendida del centro.</p>
+                    <p><strong>"El abismo de 3º ESO" — segunda detección independiente del mismo patrón que en A2:</strong> en 1º y 2º ESO las valoraciones son muy positivas (cercanas o por encima de 4.00), pero en 3º ESO TODOS los indicadores se desploman: oratoria (2.44), acceso a modelos de trabajo (2.33), claridad del profesorado (3.22 según el resumen, aunque el dato detallado de cohesión cae a 3.11). Esto no es un dato aislado: <strong>es la segunda vez que 3º ESO aparece como el curso sistémicamente más débil del centro</strong>, en dos encuestas completamente distintas (metodologías activas y criterios de trabajos).</p>
+                    <p><strong>Saturación en 4º ESO:</strong> el alumnado se siente maduro y organizado (4.50) pero suspende rotundamente la razonabilidad de los plazos de entrega (2.93) — indica acumulación de entregas por falta de calendario coordinado entre el profesorado de este nivel.</p>
+                    <p><strong>Paradoja digital con el alumnado mayor:</strong> la orientación en herramientas digitales para hacer trabajos cae progresivamente hasta un crítico 2.64 en 4º ESO — el profesorado puede estar asumiendo erróneamente que, por su edad, ya dominan estas herramientas de forma nativa.</p>
+                </div>
+                <table style="margin-top:15px;">
+                    <tr><th class="left">Indicador</th><th>1º ESO</th><th>2º ESO</th><th>3º ESO</th><th>4º ESO</th></tr>
+                    <tr><td class="left">Claridad de instrucciones</td><td>3.95</td><td class="pass">4.14</td><td class="fail">3.22</td><td class="mid">3.57</td></tr>
+                    <tr><td class="left">Plazos razonables</td><td class="pass">4.30</td><td class="pass">4.06</td><td class="fail">3.11</td><td class="fail">2.93</td></tr>
+                    <tr><td class="left">Orientación en herramientas digitales</td><td>3.75</td><td>3.83</td><td class="fail">3.00</td><td class="fail">2.64</td></tr>
+                    <tr><td class="left">Oratoria / presentación oral</td><td>3.40</td><td>3.91</td><td class="fail">2.44</td><td class="pass">3.93</td></tr>
+                    <tr><td class="left">Acceso a modelos de trabajos</td><td>3.65</td><td>3.66</td><td class="fail">2.33</td><td>3.29</td></tr>
+                </table>
+            </div>
+
+            <div class="obj-card parcial">
+                <div class="obj-header">
+                    <h3>D2 — Igualdad, coeducación y diversidad</h3>
+                    <span class="status-badge status-parcial">RESPALDO MASIVO, COMUNICACIÓN FALLIDA</span>
+                </div>
+                <div class="obj-meta">Meta: ≥10 actuaciones anuales; ≥80% satisfacción del alumnado.</div>
+                <div class="obj-data">
+                    <p><strong>El dato más positivo de todo el documento de Dirección:</strong> las familias valoran con un 4.75 que el centro trabaje la igualdad — la puntuación más alta de cualquier indicador en cualquier objetivo de todo el informe. No hay resistencia cultural o ideológica en la comunidad.</p>
+                    <p><strong>Pero el conocimiento real es el dato más bajo de todo el documento:</strong> las familias puntúan con un 1.80 su conocimiento del Plan de Igualdad y con un 1.75 su participación en sus actividades — los valores más bajos absolutos de todo el informe de seguimiento. El trabajo se queda "dentro de los muros" del centro.</p>
+                    <p><strong>Discrepancia profesorado-alumnado en transversalidad:</strong> el profesorado cree trabajar la igualdad de forma continua (4.68), pero el alumnado lo percibe mucho menos (3.39) — síntoma de que se sigue asociando a fechas señaladas (25N, 8M) y no al día a día curricular.</p>
+                    <p><strong>Alerta de seguridad percibida:</strong> mientras el 91% del profesorado considera el centro un espacio seguro frente a la discriminación, solo el 56.2% del alumnado lo afirma sin matices, y un 37.1% dice que lo es solo "a veces" — sugiere microagresiones o burlas sutiles invisibles para el profesorado.</p>
+                </div>
+            </div>
+
+            <div class="obj-card logrado">
+                <div class="obj-header">
+                    <h3>D3 — Unificación de actas en repositorios digitales</h3>
+                    <span class="status-badge status-logrado">OBJETIVO LOGRADO — EL MEJOR RESULTADO DEL DOCUMENTO</span>
+                </div>
+                <div class="obj-meta">Meta: 100% de órganos colegiados con actas archivadas digitalmente; ≥90% de cumplimiento de plazos.</div>
+                <div class="obj-data">
+                    <p><strong>Resultados excepcionales y homogéneos:</strong> todos los indicadores superan 4.09, con los dos más altos de toda la evaluación del Proyecto de Dirección: utilidad de acceder a actas de otros órganos para coordinarse (4.64) y control institucional del archivo documental (4.64). El sistema ha pasado de ser un simple archivo a una herramienta de trabajo viva entre departamentos.</p>
+                    <p><strong>Único margen de mejora:</strong> la "recepción de la plantilla" (4.09) es el ítem más bajo, aunque sigue siendo una nota notable — sugiere solo la necesidad de un recordatorio al inicio de curso para cargos nuevos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁMBITO E -->
+        <div class="section">
+            <h2>👥 Ámbito E: Participación de la Comunidad Educativa</h2>
+            <div class="alert info">
+                <h3>🔵 E1 y E2 — Pendientes de evaluación cuantitativa</h3>
+                <p>El documento detalla con precisión las actuaciones previstas, los procedimientos y los indicadores de calidad diseñados para fomentar la participación de la comunidad educativa (E1) y desarrollar una comisión de coordinación intersectorial (E2), incluyendo los modelos de encuesta correspondientes. Sin embargo, a diferencia del resto de objetivos, <strong>no se incluyen en este informe los resultados numéricos de dichas encuestas</strong>, por lo que no es posible valorar su grado de logro real con los datos disponibles. Se recomienda completar esta evaluación antes del cierre del Proyecto de Dirección.</p>
+            </div>
+        </div>
+
+        <!-- DATOS COMPARATIVOS ACADÉMICOS Y DAFO -->
+        <div class="section">
+            <h2>📈 Comparativa de Resultados Académicos (n-2, n-1, n) y Análisis DAFO</h2>
+            <p style="margin-bottom:15px; line-height:1.7;">El propio documento incluye un análisis comparativo de tres cursos consecutivos frente a Institutos de Características Similares (ISC SIM), que complementa y en parte explica los hallazgos de los objetivos C2 y A1.</p>
+
+            <h3 class="sub">Indicadores más relevantes</h3>
+            <table>
+                <tr><th class="left">Indicador</th><th>Tendencia</th><th>Centro</th><th>ISC SIM</th><th class="left">Lectura</th></tr>
+                <tr><td class="left">Programas de recuperación</td><td class="pass">↑ Positiva</td><td class="pass">100.00</td><td>49.16</td><td class="left">Pilar de éxito del centro, el doble que el entorno</td></tr>
+                <tr><td class="left">Programas de diversificación</td><td class="pass">↑ Positiva</td><td class="pass">100.00</td><td>68.44</td><td class="left">Eficacia sostenida muy superior al entorno</td></tr>
+                <tr><td class="left">Absentismo</td><td class="pass">↑ Positiva</td><td class="pass">0.53</td><td>2.06</td><td class="left">Excelente seguimiento y compromiso familiar</td></tr>
+                <tr><td class="left">Abandono escolar en ESO</td><td class="pass">↑ Positiva</td><td class="pass">0.38</td><td>1.74</td><td class="left">Sin abandonos registrados</td></tr>
+                <tr><td class="left">Promoción con adaptaciones curriculares</td><td class="fail">↓ Negativa</td><td class="fail">75.00 (50% en n)</td><td>74.62</td><td class="left">Caída crítica del 100% al 50%; dato más grave del documento</td></tr>
+                <tr><td class="left">Cumplimiento de normas de convivencia</td><td class="fail">↓ Negativa</td><td class="fail">79.44</td><td class="pass">93.22</td><td class="left">Muy por debajo del entorno; conecta con la brecha familiar de C2</td></tr>
+                <tr><td class="left">Reincidencia en conductas</td><td class="mid">↔ Discontinua</td><td class="fail">14.23</td><td class="pass">3.90</td><td class="left">Casi 4 veces el valor del entorno</td></tr>
+                <tr><td class="left">Conductas graves (total)</td><td class="pass">↑ Mejora parcial</td><td class="fail">15.65</td><td class="pass">6.41</td><td class="left">Mejora interanual real, pero persiste el doble que el entorno</td></tr>
+                <tr><td class="left">Titulación en ESO</td><td class="pass">↑ Leve mejora</td><td class="mid">86.26</td><td class="mid">88.92</td><td class="left">Mejora pero aún por debajo del entorno</td></tr>
+            </table>
+
+            <h3 class="sub">DAFO del centro (síntesis del documento original)</h3>
+            <div class="dafo-grid">
+                <div class="dafo-box dafo-f">
+                    <h4>✅ Fortalezas</h4>
+                    <ul>
+                        <li>Programas de recuperación y diversificación al 100% sostenido</li>
+                        <li>Abandono escolar y absentismo prácticamente erradicados</li>
+                        <li>Tránsito entre etapas con eficacia plena (100%)</li>
+                        <li>Evaluación positiva del alumnado en clara tendencia ascendente</li>
+                    </ul>
+                </div>
+                <div class="dafo-box dafo-d">
+                    <h4>❌ Debilidades</h4>
+                    <ul>
+                        <li>Conductas contrarias y graves duplicando/triplicando al entorno</li>
+                        <li>Reincidencia conductual persistente</li>
+                        <li>Caída severa en promoción del alumnado con ACIS (100%→50%)</li>
+                        <li>Eficacia de la repetición de curso estancada</li>
+                    </ul>
+                </div>
+                <div class="dafo-box dafo-o">
+                    <h4>🔵 Oportunidades</h4>
+                    <ul>
+                        <li>Replicar el modelo de éxito de los programas de recuperación en otros ámbitos</li>
+                        <li>Digitalización para atención a la diversidad</li>
+                        <li>Reforzar la acción tutorial y la formación en gestión positiva del aula</li>
+                    </ul>
+                </div>
+                <div class="dafo-box dafo-a">
+                    <h4>⚠️ Amenazas</h4>
+                    <ul>
+                        <li>Percepción externa de mayor conflictividad por la comparativa con ISC SIM</li>
+                        <li>Riesgo de exclusión del alumnado con adaptaciones si no se actúa con urgencia</li>
+                        <li>Posible cronificación de la tendencia descendente en promoción general</li>
+                        <li>Sobrecarga del profesorado por intervenciones sin apoyos adicionales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PATRONES TRANSVERSALES -->
+        <div class="section">
+            <h2>🔍 Patrones Transversales Detectados (Análisis Cruzado)</h2>
+
+            <div class="alert danger">
+                <h3>🔴 Patrón 1: 3º ESO como curso sistémicamente débil</h3>
+                <p>Este es, sin duda, el hallazgo más sólido de todo el documento, porque <strong>aparece de forma completamente independiente en dos encuestas distintas con poblaciones y preguntas diferentes</strong>: en el Objetivo A2 (metodologías activas), 3º ESO obtiene las peores notas del centro en dinamismo (2.89) y clase invertida (2.78); en el Objetivo D1 (criterios de trabajos), 3º ESO vuelve a desplomarse en prácticamente todos los indicadores (oratoria 2.44, modelos de trabajo 2.33). Que el mismo curso aparezca como punto débil en dos análisis independientes descarta el azar y apunta a un problema real de coordinación docente o de diseño de tareas específico de ese nivel, no a una característica aleatoria del alumnado.</p>
+            </div>
+
+            <div class="alert danger">
+                <h3>🔴 Patrón 2: Desconexión sistemática de las familias</h3>
+                <p>La familia aparece como el sector más crítico o más desconectado en al menos tres objetivos distintos: en C2 (Convivencia), su implicación percibida (2.83) es la mitad que la del profesorado (4.22); en D2 (Igualdad), su conocimiento del Plan de Igualdad (1.80) y su participación (1.75) son, literalmente, las dos puntuaciones más bajas de todo el documento de seguimiento del Proyecto de Dirección. La paradoja es que las familias SÍ apoyan masivamente lo que hace el centro (4.75 en D2), pero no están al tanto de ello ni participan activamente. El problema no es de actitud, sino de canal de comunicación y de oportunidades reales de participación.</p>
+            </div>
+
+            <div class="alert">
+                <h3>🟡 Patrón 3: La brecha entre "creer" y "hacer"</h3>
+                <p>Se repite en varios objetivos un mismo fenómeno: una valoración muy alta de la importancia de algo, acompañada de una participación o aplicación práctica muy baja. En B2 (banco de buenas prácticas): 4.32 de acuerdo en que es importante compartir, frente a solo 2.05 de participación real. En C1 (Plan de Centro): 4.43 en utilidad percibida, frente a 3.57 en uso práctico real. Este patrón sugiere que las barreras no son de convicción, sino operativas: falta de tiempo, procesos percibidos como tediosos, o ausencia de hábito instalado.</p>
+            </div>
+
+            <div class="conclusion green">
+                <h3>✅ Patrón 4: Asimetría tecnológica específica, no genérica</h3>
+                <p>Resulta especialmente interesante el contraste dentro de un mismo objetivo (B3): el profesorado domina con excelencia el Cuaderno de Séneca (4.35-4.55 en todos los indicadores) pero fracasa de forma generalizada en la sincronización con Moodle (2.15-2.40). Esto, unido al alto nivel general de competencia digital detectado en B1 (81% del claustro en nivel B1-B2), demuestra que <strong>no existe un problema genérico de "brecha digital docente"</strong>, sino un obstáculo técnico muy concreto y localizado en el proceso de sincronización entre dos plataformas específicas. Es una buena noticia: el problema es acotado y, por tanto, más fácil de resolver con una formación muy puntual.</p>
+            </div>
+        </div>
+
+        <!-- CONCLUSIONES Y RECOMENDACIONES -->
+        <div class="section">
+            <h2>🎯 Conclusiones y Recomendaciones Prioritarias</h2>
+
+            <div class="proposals">
+                <h3>1. Intervención específica y urgente en 3º ESO</h3>
+                <ul>
+                    <li>Convocar una reunión monográfica del equipo docente de 3º ESO antes de que comience el próximo curso, dado que el problema se ha detectado en dos objetivos distintos de forma independiente.</li>
+                    <li>Rediseñar las tareas de este nivel con mayor andamiaje (pasos guiados, ejemplos previos, rúbricas entregadas antes de empezar) en lugar de generalizar medidas a todo el centro.</li>
+                    <li>Indicador de éxito sugerido: que en la próxima encuesta de seguimiento ningún indicador de 3º ESO esté 1 punto o más por debajo de la media del resto de niveles (actualmente la diferencia llega a superar 1.5 puntos en varios ítems).</li>
+                </ul>
+            </div>
+
+            <div class="proposals">
+                <h3>2. Plan de reconexión con las familias</h3>
+                <ul>
+                    <li>Traducir el Plan de Igualdad y los protocolos de Convivencia a formatos visuales muy breves (infografías de una página) para enviar por iPasen, dado que el problema no es de actitud sino de desconocimiento (1.75-1.80 en participación/conocimiento).</li>
+                    <li>Organizar al menos una actividad conjunta familias-centro por trimestre que no sea meramente informativa sino participativa (talleres, no charlas).</li>
+                    <li>Indicador de éxito: elevar la autovaloración de implicación familiar en convivencia del 2.83 actual a un mínimo de 3.5 en la próxima encuesta.</li>
+                </ul>
+            </div>
+
+            <div class="proposals">
+                <h3>3. Cerrar la brecha entre intención y acción</h3>
+                <ul>
+                    <li>Simplificar drásticamente el proceso de aportación al banco de buenas prácticas (formato de "ficha rápida" de un párrafo) para capitalizar al 78.9% de profesorado ya dispuesto.</li>
+                    <li>Crear espacio fijo de 10 minutos en cada Claustro para la presentación de una "buena práctica del mes", dando reconocimiento institucional sin exigir un proceso burocrático adicional.</li>
+                </ul>
+            </div>
+
+            <div class="proposals">
+                <h3>4. Resolver el obstáculo técnico puntual de Moodle-Séneca</h3>
+                <ul>
+                    <li>Sustituir la formación general por un taller práctico de vinculación en vivo de una unidad didáctica completa, aprovechando a los 7 docentes que ya sincronizan con éxito como mentores de los 6 que lo intentaron sin éxito.</li>
+                    <li>Indicador de éxito: pasar del 35% actual de sincronización exitosa a un 70% en el siguiente curso, dado que el obstáculo es técnico y acotado, no actitudinal.</li>
+                </ul>
+            </div>
+
+            <div class="proposals">
+                <h3>5. Atender la caída crítica en promoción del alumnado con adaptaciones curriculares</h3>
+                <ul>
+                    <li>Este es, dentro de toda la comparativa académica, el dato que ha empeorado de forma más drástica (del 100% al 50% de promoción). Debe convertirse en prioridad absoluta del próximo curso, con tutorías semanales específicas con PT y coordinación mensual entre tutores y especialistas, tal y como ya propone el propio documento.</li>
+                    <li>Indicador de éxito: el propio documento fija la meta en el 90% de promoción del alumnado con ACIS; dado el deterioro detectado, se recomienda un primer hito intermedio realista del 70% antes de aspirar al 90% final.</li>
+                </ul>
+            </div>
+
+            <div class="proposals">
+                <h3>6. Consolidar y replicar lo que ya funciona</h3>
+                <ul>
+                    <li>El modelo de gestión documental (D3, Cuaderno de Séneca en B3, Plan de Centro en C1) ha demostrado ser el área de mayor madurez del centro. Se recomienda usar explícitamente esta metodología de "plantilla común + formación práctica + repositorio centralizado" como plantilla de referencia para resolver los puntos débiles detectados en convivencia (C2) e igualdad (D2), donde el problema es, precisamente, de comunicación y sistematización, no de voluntad.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
