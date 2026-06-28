@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informe Académico 4º ESO A - Convocatoria Ordinaria</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.3em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      header p {
+        font-size: 1.15em;
+        opacity: 0.9;
+      }
+      .content {
+        padding: 40px;
+      }
+      .section {
+        margin-bottom: 50px;
+      }
+      .section h2 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #667eea;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .stat-card {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .stat-card h3 {
+        font-size: 0.95em;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+      .stat-card .value {
+        font-size: 2.2em;
+        font-weight: bold;
+      }
+      .chart-container {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        margin: 20px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+      .bars-wrapper {
+        margin: 20px 0;
+      }
+      .bar-item {
+        margin: 14px 0;
+      }
+      .bar-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 0.95em;
+      }
+      .bar-bg {
+        background: #e9ecef;
+        height: 28px;
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 10px;
+        color: white;
+        font-weight: bold;
+        font-size: 0.85em;
+      }
+      .bar-green {
+        background: linear-gradient(90deg, #10b981, #059669);
+      }
+      .bar-yellow {
+        background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      }
+      .bar-red {
+        background: linear-gradient(90deg, #f87171, #ef4444);
+      }
+      .bar-darkred {
+        background: linear-gradient(90deg, #b91c1c, #7f1d1d);
+      }
+      .note-mini {
+        font-size: 0.85em;
+        color: #666;
+        margin-top: 4px;
+        font-style: italic;
+      }
+      .alert {
+        background: #fff3cd;
+        border-left: 5px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+      .alert.danger {
+        background: #f8d7da;
+        border-left-color: #dc3545;
+      }
+      .alert.info {
+        background: #d1ecf1;
+        border-left-color: #17a2b8;
+      }
+      .alert h3 {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+      .alert.danger h3 {
+        color: #721c24;
+      }
+      .alert.info h3 {
+        color: #0c5460;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-top: 10px;
+      }
+      th {
+        background: #667eea;
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: 600;
+      }
+      td {
+        padding: 10px 15px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      tr:hover {
+        background: #f8f9fa;
+      }
+      .fail {
+        color: #dc3545;
+        font-weight: bold;
+      }
+      .pass {
+        color: #28a745;
+      }
+      .empty-state {
+        padding: 15px;
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+      }
+      .conclusion {
+        background: #e7f3ff;
+        border-left: 5px solid #2196f3;
+        padding: 25px;
+        margin: 20px 0;
+        border-radius: 10px;
+        line-height: 1.8;
+      }
+      .conclusion h3 {
+        color: #1565c0;
+        margin-bottom: 15px;
+      }
+      .conclusion.green {
+        background: #d4edda;
+        border-left-color: #28a745;
+      }
+      .conclusion.green h3 {
+        color: #155724;
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        .container {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📊 INFORME ACADÉMICO</h1>
+        <p>4º ESO A — Convocatoria ORDINARIA — Fin de Curso 2025-26</p>
+      </header>
+
+      <div class="content">
+        <!-- RESUMEN GENERAL -->
+        <div class="section">
+          <h2>📋 Resumen General del Grupo</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3>Total Alumnos/as</h3>
+              <div class="value">28</div>
+            </div>
+            <div class="stat-card">
+              <h3>Nota Media de Grupo</h3>
+              <div class="value">7.32</div>
+            </div>
+            <div class="stat-card">
+              <h3>Alumnos/as con 0 Suspensos</h3>
+              <div class="value">75.0%</div>
+            </div>
+            <div class="stat-card">
+              <h3>Alumnos/as que TITULAN</h3>
+              <div class="value">89.3%</div>
+              <h6>25 de 28 alumnos/as</h6>
+            </div>
+          </div>
+          <p class="note-mini" style="margin-top: 10px">
+            Nota: el bloque final del estadillo original calcula sus porcentajes
+            (84% / 16% / 4% / 8%) sobre una base de 25 alumnos/as, pero el grupo
+            real —y el que toma EFI, materia común a todos/as— es de 28. Los
+            porcentajes de este informe (75.0% / 89.3%) se han recalculado sobre
+            los 28 alumnos/as reales; la media de grupo resultante (7.32)
+            coincide exactamente con la del documento original, lo que confirma
+            que el total correcto es 28.
+          </p>
+          <p class="note-mini">
+            4º ESO es el curso de salida de la etapa: las materias pendientes en
+            esta convocatoria condicionan la obtención del título de la ESO, por
+            lo que los casos críticos señalados en este informe deben tratarse
+            con prioridad absoluta.
+          </p>
+        </div>
+
+        <!-- RENDIMIENTO POR MATERIAS -->
+        <div class="section">
+          <h2>📈 Rendimiento por Materias (ordenado de menor a mayor media)</h2>
+          <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 20px">
+              Nota Media por Asignatura
+            </h3>
+            <div class="bars-wrapper">
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>TEC (Tecnología)</span><span>5.3</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-red" style="width: 53%">5.3</div>
+                </div>
+                <div class="note-mini">11 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>MAA (Matemáticas Académicas)</span><span>5.7</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-red" style="width: 57%">5.7</div>
+                </div>
+                <div class="note-mini">10 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ING (Inglés)</span><span>5.8</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-red" style="width: 58%">5.8</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>LCL (Lengua Castellana y Literatura)</span
+                  ><span>6.4</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 64%">6.4</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FYQ (Física y Química)</span><span>6.4</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 64%">6.4</div>
+                </div>
+                <div class="note-mini">9 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FOP (Formación y Orientación Personal/Profesional)</span
+                  ><span>6.6</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 66%">6.6</div>
+                </div>
+                <div class="note-mini">12 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>MAB (Matemáticas Aplicadas)</span><span>6.9</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 69%">6.9</div>
+                </div>
+                <div class="note-mini">15 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>DIG (Digitalización)</span><span>7.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 70%">7.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 5 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ALS (Ámbito Lingüístico y Social)</span><span>7.3</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 73%">7.3</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 3 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>EFI (Educación Física)</span><span>7.4</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 74%">7.4</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FIL (Filosofía)</span><span>7.6</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 76%">7.6</div>
+                </div>
+                <div class="note-mini">12 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>LAT (Latín)</span><span>7.6</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 76%">7.6</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 7 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>EAR (Educación Audiovisual)</span><span>8.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 80%">8.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 8 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FRA2 (Francés 2ª Lengua)</span><span>8.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 80%">8.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 6 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ACT (Ámbito Científico-Tecnológico)</span
+                  ><span>8.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 80%">8.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 3 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>PEU (Preparación para la Universidad)</span
+                  ><span>8.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 80%">8.0</div>
+                </div>
+                <div class="note-mini">11 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>GEH (Geografía e Historia)</span><span>8.2</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 82%">8.2</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>REL (Religión)</span><span>8.2</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 82%">8.2</div>
+                </div>
+                <div class="note-mini">22 alumnos/as matriculados</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>BYG (Biología y Geología)</span><span>8.4</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 84%">8.4</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 8 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>MUS (Música)</span><span>8.6</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 86%">8.6</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 9 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ECE (Economía y Emprendimiento)</span><span>9.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 90%">9.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 6 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ATEDU (Atención Educativa)</span><span>9.0</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 90%">9.0</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 6 alumnos/as matriculados
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ACC (Ámbito Comunicación/Cultural)</span
+                  ><span>9.4</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 94%">9.4</div>
+                </div>
+                <div class="note-mini">
+                  Grupo reducido: 5 alumnos/as matriculados
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- % SUSPENSOS POR ASIGNATURA -->
+          <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 20px">
+              Porcentaje de Suspensos por Asignatura (sobre matriculados)
+            </h3>
+            <div class="bars-wrapper">
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>MAA (Matemáticas Académicas)</span
+                  ><span class="fail">20.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 20%">2/10</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>ING (Inglés)</span><span class="fail">20.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 20%">5/25</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>TEC (Tecnología)</span><span class="fail">18.2%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 18.2%">
+                    2/11
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FRA2 (Francés 2ª Lengua)</span
+                  ><span class="fail">16.7%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 16.7%">
+                    1/6
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>EFI (Educación Física)</span
+                  ><span class="fail">14.3%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 14.3%">
+                    4/28
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>EAR (Educación Audiovisual)</span
+                  ><span class="fail">12.5%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 12.5%">
+                    1/8
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>LCL (Lengua Castellana y Literatura)</span
+                  ><span class="fail">12.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 12%">3/25</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>PEU (Preparación para la Universidad)</span
+                  ><span>9.1%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 9.1%">1/11</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>GEH (Geografía e Historia)</span><span>8.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 8%">2/25</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>FIL (Filosofía)</span><span>8.3%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 8.3%">1/12</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>FOP</span><span>8.3%</span></div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 8.3%">1/12</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>MAB (Matemáticas Aplicadas)</span><span>6.7%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 6.7%">1/15</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span>REL (Religión)</span><span>4.5%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 4.5%">1/22</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span
+                    >Resto de materias (ACT, ALS, ACC, BYG, DIG, ECE, FYQ, LAT,
+                    MUS, ATEDU)</span
+                  ><span class="pass">0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 5%">
+                    0 suspensos
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="note-mini" style="margin-top: 15px">
+              "Nº alumnos pendientes por materia". Dado el alto número de
+              materias optativas con pocos alumnos/as matriculados, los
+              porcentajes son muy reducidas (menos de 10 matriculados/as) deben
+              interpretarse con cautela.
+            </p>
+          </div>
+        </div>
+
+        <!-- MATERIAS CON ALTO ÍNDICE DE SUSPENSOS -->
+        <div class="section">
+          <h2>⚠️ Materias con Alto Índice de Suspensos</h2>
+
+          <div class="alert danger">
+            <h3>🔴 NIVEL CRÍTICO (&gt;50% suspensos)</h3>
+            <div class="empty-state">
+              No hay ninguna materia en este nivel. ✅
+            </div>
+          </div>
+
+          <div class="alert">
+            <h3>🟡 NIVEL PREOCUPANTE (25-35% suspensos)</h3>
+            <div class="empty-state">
+              No hay ninguna materia en este nivel. ✅
+            </div>
+          </div>
+
+          <div class="alert info">
+            <h3>🔵 NIVEL MODERADO (10-20% suspensos)</h3>
+            <table>
+              <tr>
+                <th>Materia</th>
+                <th>Media</th>
+                <th>% Suspensos</th>
+                <th>Alumnos Suspensos</th>
+              </tr>
+              <tr>
+                <td><strong>MAA (Matemáticas Académicas)</strong></td>
+                <td>5.7</td>
+                <td class="fail">20.0%</td>
+                <td>2 de 10</td>
+              </tr>
+              <tr>
+                <td><strong>ING (Inglés)</strong></td>
+                <td>5.8</td>
+                <td class="fail">20.0%</td>
+                <td>5 de 25</td>
+              </tr>
+              <tr>
+                <td><strong>TEC (Tecnología)</strong></td>
+                <td>5.3</td>
+                <td class="fail">18.2%</td>
+                <td>2 de 11</td>
+              </tr>
+              <tr>
+                <td><strong>FRA2 (Francés 2ª Lengua)</strong></td>
+                <td>8.0</td>
+                <td class="fail">16.7%</td>
+                <td>1 de 6</td>
+              </tr>
+              <tr>
+                <td><strong>EFI (Educación Física)</strong></td>
+                <td>7.4</td>
+                <td>14.3%</td>
+                <td>4 de 28</td>
+              </tr>
+              <tr>
+                <td><strong>EAR (Educación Audiovisual)</strong></td>
+                <td>8.0</td>
+                <td>12.5%</td>
+                <td>1 de 8</td>
+              </tr>
+              <tr>
+                <td><strong>LCL (Lengua Castellana y Literatura)</strong></td>
+                <td>6.4</td>
+                <td>12.0%</td>
+                <td>3 de 25</td>
+              </tr>
+            </table>
+            <p class="note-mini" style="margin-top: 10px">
+              TEC tiene la media más baja de todo el informe (5.3). FRA2 y EAR
+              tienen matrículas reducidas (6 y 8 alumnos/as), por lo que su
+              porcentaje debe leerse con cautela: un único suspenso supone ya un
+              12-17%.
+            </p>
+          </div>
+        </div>
+
+        <!-- DISTRIBUCIÓN DE SUSPENSOS EN EL GRUPO -->
+        <div class="section">
+          <h2>📊 Distribución de Suspensos en el Grupo</h2>
+          <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 20px">
+              Análisis de Suspensos por Alumno/a
+            </h3>
+            <div class="bars-wrapper">
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span><strong>0 Suspensos</strong> (Rendimiento Óptimo)</span
+                  ><span class="pass">75.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 75%">
+                    21 alumnos
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span><strong>1 Suspenso</strong> (Situación Controlada)</span
+                  ><span class="pass">14.3%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-green" style="width: 14.3%">
+                    4 alumnos
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span
+                    ><strong>2 Suspensos</strong> (Requiere Seguimiento)</span
+                  ><span>0.0%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-yellow" style="width: 3%">
+                    0 alumnos
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span><strong>3-4 Suspensos</strong> (Atención Urgente)</span
+                  ><span class="fail">3.6%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-red" style="width: 3.6%">
+                    1 alumno
+                  </div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label">
+                  <span><strong>5 o más Suspensos</strong> (Crítico)</span
+                  ><span class="fail">7.1%</span>
+                </div>
+                <div class="bar-bg">
+                  <div class="bar-fill bar-darkred" style="width: 7.1%">
+                    2 alumnos
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                margin-top: 20px;
+                padding: 15px;
+                background: #e7f3ff;
+                border-radius: 10px;
+              "
+            >
+              <p style="font-weight: bold; color: #1565c0">
+                📊 Resumen Acumulado:
+              </p>
+              <ul style="margin-left: 20px; margin-top: 10px; color: #1565c0">
+                <li>Con <strong>0 suspensos:</strong> 21 alumnos/as (75.0%)</li>
+                <li>
+                  Con <strong>0-1 suspensos:</strong> 25 alumnos/as (89.3%)
+                </li>
+                <li>
+                  Con <strong>0-2 suspensos:</strong> 25 alumnos/as (89.3%)
+                </li>
+                <li>
+                  Con <strong>3-4 suspensos:</strong> 1 alumno/a (3.6%) —
+                  Atención urgente
+                </li>
+                <li>
+                  Con <strong>5 o más suspensos:</strong> 2 alumnos/as (7.1%) —
+                  uno con 7 y otro con 10 suspensos — Crítico
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONCLUSIONES -->
+        <div class="section">
+          <h2>💡 Conclusiones del Análisis</h2>
+
+          <div class="conclusion">
+            <h3>Diagnóstico General</h3>
+            <p>
+              El grupo de 4º ESO A cierra la convocatoria ordinaria con una
+              media de 7.32 y un 75.0% del alumnado (21 de 28) sin ninguna
+              materia pendiente. El 89.3% (25 de 28) tiene como máximo 1
+              suspenso. Tratándose del curso de salida de la etapa, lo más
+              relevante es que 3 alumnos/as (10.7%) presentan una situación de
+              extrema gravedad —con 4, 7 y 10 materias pendientes
+              respectivamente— que comprometen directamente la obtención del
+              título de la ESO y deben repetir de curso.
+            </p>
+          </div>
+
+          <div class="conclusion">
+            <h3>Principales Problemáticas Identificadas</h3>
+            <p>
+              <strong
+                >1. Matemáticas Académicas e Inglés, las materias con más
+                incidencia:</strong
+              >
+              ambas registran un 20.0% de suspensos (MAA: 2 de 10; ING: 5 de
+              25), situándose en el techo del nivel moderado.
+            </p>
+            <p>
+              <strong>2. Tecnología con la media más baja del informe:</strong>
+              TEC presenta un 18.2% de suspensos (2 de 11) y una media de solo
+              5.3, la más baja de las 23 materias evaluadas.
+            </p>
+            <p>
+              <strong>3. FRA2, EFI, EAR y LCL con incidencia moderada:</strong>
+              FRA2 (16.7%, 1 de 6) y EAR (12.5%, 1 de 8) deben interpretarse con
+              cautela por su matrícula reducida; EFI (14.3%, 4 de 28) y LCL
+              (12.0%, 3 de 25) y merecen seguimiento, especialmente EFI por ser
+              inusual que registre tantos suspensos.
+            </p>
+            <p>
+              <strong>4. Primer caso crítico:</strong> Alumna de incorporación
+              tardía y desconoce el idioma (7 suspensos, media 3.80) no titula y
+              debe repetir de curso.
+            </p>
+          </div>
+
+          <div class="conclusion green">
+            <h3>Factores de Fortaleza del Grupo</h3>
+            <p>
+              Al margen del caso crítico señalado, el grupo presenta un perfil
+              sólido: el 75.0% del alumnado no tiene ninguna materia pendiente,
+              y dos alumnos/as, obtienen una media perfecta de 10.00.
+            </p>
+            <p>
+              El rendimiento es excelente en numerosas materias optativas: ACC
+              (9.4), ECE y ATEDU (9.0 cada una), MUS (8.6), BYG (8.4), GEH y REL
+              (8.2 cada una) destacan especialmente. Dentro de las materias
+              troncales, GEH (8.2, 25 matriculados/as) y REL (8.2, 22
+              matriculados/as) muestran resultados notablemente superiores a los
+              de MAA, ING o TEC, lo que confirma que las dificultades del grupo,
+              fuera de los casos críticos, están razonablemente contenidas y
+              permiten diseñar para el próximo curso escolar un plan de refuerzo
+              del aprendizaje.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
