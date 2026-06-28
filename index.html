@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      I.E.S. AZAHAR Informes del Centro - Convocatoria ORDINARIA 2025/2026
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 3em;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      header p {
+        font-size: 1.3em;
+        opacity: 0.95;
+      }
+
+      .content {
+        padding: 50px 40px;
+      }
+
+      .section {
+        margin-bottom: 50px;
+      }
+
+      .section h2 {
+        color: #667eea;
+        font-size: 2.2em;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .info-card {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+      }
+
+      .info-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      .info-card h3 {
+        font-size: 1.6em;
+        margin-bottom: 12px;
+      }
+
+      .info-card p {
+        font-size: 1.05em;
+        line-height: 1.6;
+        opacity: 0.95;
+      }
+
+      .info-card .icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .academic-cards .info-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .convivencia-card {
+        background: linear-gradient(
+          135deg,
+          #f093fb 0%,
+          #f5576c 100%
+        ) !important;
+      }
+
+      .footer {
+        background: #f8f9fa;
+        padding: 30px;
+        text-align: center;
+        color: #666;
+        border-top: 3px solid #667eea;
+      }
+
+      .footer p {
+        margin: 8px 0;
+      }
+
+      .intro-text {
+        background: #e7f3ff;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        border-left: 5px solid #2196f3;
+      }
+
+      .intro-text p {
+        color: #1565c0;
+        line-height: 1.8;
+        font-size: 1.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📊 Informes del Centro Educativo</h1>
+        <p>Convocatoria ORDINARIA - Curso Académico 2025/2026</p>
+      </header>
+
+      <div class="content">
+        <div class="intro-text">
+          <p>
+            <strong>Bienvenido al portal de informes del centro.</strong> A
+            continuación encontrará los informes académicos de rendimiento por
+            grupos y el informe general de convivencia del primer trimestre.
+            Haga clic en cualquier tarjeta para acceder al informe
+            correspondiente.
+          </p>
+        </div>
+
+        <!-- Informe de Convivencia -->
+        <div class="section">
+          <h2>📋 Informe de Convivencia</h2>
+          <div class="cards-grid">
+            <a href="Convivencia.html" class="info-card convivencia-card">
+              <span class="icon">🤝</span>
+              <h3>Informe de Convivencia</h3>
+              <p>
+                Análisis completo de las conductas contrarias a las normas de
+                convivencia, propuestas pedagógicas y medidas de mejora para el
+                primer trimestre.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Informes Académicos 1º ESO -->
+        <div class="section">
+          <h2>📚 Informes Académicos - 1º ESO</h2>
+          <div class="cards-grid academic-cards">
+            <a href="Informe1A.html" class="info-card">
+              <span class="icon">📖</span>
+              <h3>1º ESO A</h3>
+              <p>
+                Informe académico detallado del grupo 1º A con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+
+            <a href="Informe1B.html" class="info-card">
+              <span class="icon">📖</span>
+              <h3>1º ESO B</h3>
+              <p>
+                Informe académico detallado del grupo 1º B con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+
+            <a href="Informe1C.html" class="info-card">
+              <span class="icon">📖</span>
+              <h3>1º ESO C</h3>
+              <p>
+                Informe académico detallado del grupo 1º C con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Informes Académicos 2º ESO -->
+        <div class="section">
+          <h2>📚 Informes Académicos - 2º ESO</h2>
+          <div class="cards-grid academic-cards">
+            <a href="Informe2A.html" class="info-card">
+              <span class="icon">📗</span>
+              <h3>2º ESO A</h3>
+              <p>
+                Informe académico detallado del grupo 2º A con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+
+            <a href="Informe2B.html" class="info-card">
+              <span class="icon">📗</span>
+              <h3>2º ESO B</h3>
+              <p>
+                Informe académico detallado del grupo 2º B con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Informes Académicos 3º ESO -->
+        <div class="section">
+          <h2>📚 Informes Académicos - 3º ESO</h2>
+          <div class="cards-grid academic-cards">
+            <a href="Informe3A.html" class="info-card">
+              <span class="icon">📘</span>
+              <h3>3º ESO A</h3>
+              <p>
+                Informe académico detallado del grupo 3º A con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+
+            <a href="Informe3B.html" class="info-card">
+              <span class="icon">📘</span>
+              <h3>3º ESO B</h3>
+              <p>
+                Informe académico detallado del grupo 3º B con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Informes Académicos 4º ESO -->
+        <div class="section">
+          <h2>📚 Informes Académicos - 4º ESO</h2>
+          <div class="cards-grid academic-cards">
+            <a href="Informe4A.html" class="info-card">
+              <span class="icon">📙</span>
+              <h3>4º ESO A</h3>
+              <p>
+                Informe académico detallado del grupo 4º A con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+
+            <a href="Informe4B.html" class="info-card">
+              <span class="icon">📙</span>
+              <h3>4º ESO B</h3>
+              <p>
+                Informe académico detallado del grupo 4º B con análisis de
+                rendimiento, materias críticas y propuestas de mejora.
+              </p>
+            </a>
+          </div>
+        </div>
+        <!-- Informe Proyecto de Dirección (TERCER AÑO) -->
+        <div class="section">
+          <h2>📋 Informe Proyecto de Dirección (Tercer año)</h2>
+          <div class="cards-grid">
+            <a
+              href="InformeProyectoDireccion_Tercer.html"
+              class="info-card convivencia-card"
+            >
+              <span class="icon">📋</span>
+              <h3>
+                Informe Evaluación de Objetivos del Proyecto de Dirección
+                (Tercer año)
+              </h3>
+              <p>
+                El Proyecto de Dirección articula 12 objetivos específicos en 5
+                ámbitos (Rendimiento Escolar, Enseñanza-Aprendizaje,
+                Organización, Liderazgo Pedagógico y Participación).
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          <strong
+            >Centro Educativo I.E.S. AZAHAR (Antas) - Informes del Segundo
+            Trimestre Trimestre 2025/2026</strong
+          >
+        </p>
+        <p>Generado: 29 de junio de 2026</p>
+      </div>
+    </div>
+  </body>
+</html>
